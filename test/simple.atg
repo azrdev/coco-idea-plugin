@@ -1,0 +1,6 @@
+COMPILER test
+
+PRODUCTIONS
+test = "foo" "bar" baz .
+baz = "baz" .
+END test.

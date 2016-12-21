@@ -1,0 +1,103 @@
+{
+    parserClass="de.qrdn.coco_idea.CocoParser"
+    extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+    psiClassPrefix="Coco"
+    psiImplClassSuffix="Impl"
+    psiPackage="de.qrdn.coco_idea.psi"
+    psiImplPackage="de.qrdn.coco_idea.psi.impl"
+    elementTypeHolderClass="de.qrdn.coco_idea.psi.CocoTypes"
+    elementTypeClass="de.qrdn.coco_idea.psi.CocoElementType"
+    tokenTypeClass="de.qrdn.coco_idea.psi.CocoTokenType"
+    // psiImplUtilClass="de.qrdn.coco_idea.psi.impl.CocoPsiImplUtil"
+
+    // tokens are recognized by JFlex lexer, definitions here are only informative / for testing
+    tokens = [
+        "COMPILER"
+        "IGNORECASE"
+        "CHARACTERS"
+        "TOKENS"
+        "PRAGMAS"
+        "COMMENTS"
+        "FROM"
+        "TO"
+        "NESTED"
+        "IGNORE"
+        "PRODUCTIONS"
+        EQUALS  = "="
+        "END"
+        DOT     = "."
+        PLUS    = "+"
+        MINUS   = "-"
+        DOTDOT  = ".."
+        "ANY"
+        LESS    = "<"
+        GREATER = ">"
+        LESSDOT = "<."
+        GREATERDOT  = ".>"
+        INSTR_START = "(."
+        INSTR_END   = ".)"
+        OR      = "|"
+        "WEAK"
+        LPAREN  = "("
+        RPAREN  = ")"
+        LSPAREN = "["
+        RSPAREN = "]"
+        LAPAREN = "{"
+        RAPAREN = "}"
+        "SYNC"
+        "IF"
+        "CONTEXT"
+
+        ident='regexp:[a-zA-Z_][a-zA-Z_0-9]*'
+        string='regexp:"[^"]*?"'
+        character="regexp:'([^\'\\\n\r]|\\\'|\\[\u0020-\u0026\u0028-\u007e]*)'"
+        comment='regexp://.*$|/\*.*\*/' // |\(\..*\.\)
+        space='regexp:\s'
+    ]
+}
+
+coco_file ::=
+    //TODO: instrumentation_code
+    COMPILER ident
+    [ IGNORECASE ]
+    //TODO: instrumentation_code
+    [ CHARACTERS set_decl* ]
+    [ TOKENS token_decl* ]
+    [ PRAGMAS token_decl* ]
+    { COMMENTS FROM token_expr TO token_expr NESTED? }*
+    { IGNORE set }*
+    PRODUCTIONS
+    {
+    ident attr_decl? sem_text? '=' expression '.'
+    }*
+    END ident '.'
+
+set_decl ::= ident '=' set '.'
+set ::= sim_set ('+' sim_set | '-' sim_set)*
+sim_set ::= ident | string | character ['..' character] | ANY
+token_decl ::= sym [ '=' token_expr '.' ] [ sem_text ]
+attr_decl ::= '<.' /* instrumentation_code* */ '.>' | '<' /* instrumentation_code* */ '>'
+expression ::= term ( '|' term )*
+term ::= ( [resolver] factor factor* )?
+factor ::=
+        [ WEAK ]
+        sym
+        [ attribs ]
+    | '(' expression ')'
+    | '[' expression ']'
+    | '{' expression '}'
+    | sem_text
+    | ANY
+    | SYNC
+resolver ::= IF '(' condition
+condition ::= ( '(' condition | ANY )* ')' // nesting
+token_expr ::= token_term ( '|' token_term )*
+token_term ::= token_factor token_factor* [ CONTEXT '(' token_expr ')' ]
+token_factor ::=
+        sym
+    | '(' token_expr ')'
+    | '[' token_expr ']'
+    | '{' token_expr '}'
+sym ::= ( ident | string | character )
+attribs ::= '<' /* instrumentation_code* */ '>' | '<.' /* instrumentation_code* */ '.>'
+sem_text ::= '(.' /* instrumentation_code* */ '.)'
