@@ -28,6 +28,7 @@
     <!-- Add your extensions here -->
     <fileTypeFactory implementation="de.qrdn.coco_idea.CocoFileTypeFactory"/>
     <lang.parserDefinition language="Coco" implementationClass="de.qrdn.coco_idea.CocoParserDefinition"/>
+    <lang.braceMatcher language="Coco" implementationClass="de.qrdn.coco_idea.CocoBraceMatcher"/>
   </extensions>
 
   <actions>
