@@ -32,6 +32,7 @@ hex = [0-9a-f]
 white_space = [ \r\n\t]+
 ident = {letter}({letter}|{digit})*
 // number = {digit}{digit}* //TODO in coco.atg, but unused
+//TODO: resolve escapes & remove quotes in string & char
 string = \" ( {string_ch} | \\ {printable} )* \"
 char = \' ( {char_ch} | \\ {printable} {hex}* ) \'
 

@@ -56,6 +56,8 @@
     ]
 }
 
+//TODO: pin,recoverWhile attributes to parse broken files
+
 coco_file ::=
     //TODO: instrumentation_code
     COMPILER ident
