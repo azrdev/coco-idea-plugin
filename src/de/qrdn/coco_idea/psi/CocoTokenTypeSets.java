@@ -6,23 +6,23 @@ import com.intellij.psi.tree.TokenSet;
 public interface CocoTokenTypeSets {
 
     TokenSet KEYWORDS = TokenSet.create(
-            CocoTypes.COMPILER,
-            CocoTypes.IGNORECASE,
-            CocoTypes.CHARACTERS,
-            CocoTypes.TOKENS,
-            CocoTypes.PRAGMAS,
-            CocoTypes.COMMENTS,
-            CocoTypes.FROM,
-            CocoTypes.TO,
-            CocoTypes.NESTED,
-            CocoTypes.IGNORE,
-            CocoTypes.PRODUCTIONS,
-            CocoTypes.END,
-            CocoTypes.ANY,
-            CocoTypes.WEAK,
-            CocoTypes.SYNC,
-            CocoTypes.IF,
-            CocoTypes.CONTEXT);
+            CocoTypes.COMPILER_KEYWORD,
+            CocoTypes.IGNORECASE_KEYWORD,
+            CocoTypes.CHARACTERS_KEYWORD,
+            CocoTypes.TOKENS_KEYWORD,
+            CocoTypes.PRAGMAS_KEYWORD,
+            CocoTypes.COMMENTS_KEYWORD,
+            CocoTypes.FROM_KEYWORD,
+            CocoTypes.TO_KEYWORD,
+            CocoTypes.NESTED_KEYWORD,
+            CocoTypes.IGNORE_KEYWORD,
+            CocoTypes.PRODUCTIONS_KEYWORD,
+            CocoTypes.END_KEYWORD,
+            CocoTypes.ANY_KEYWORD,
+            CocoTypes.WEAK_KEYWORD,
+            CocoTypes.SYNC_KEYWORD,
+            CocoTypes.IF_KEYWORD,
+            CocoTypes.CONTEXT_KEYWORD);
 
     TokenSet IDENTIFIER = TokenSet.create(CocoTypes.IDENT);
 

@@ -57,24 +57,24 @@ EndOfLineComment     = "//"[^\r\n]*(\n|\r|\r\n)?
     {Comment}           { return CocoTypes.COMMENT; }
 
     // keywords
-    "COMPILER"          { return CocoTypes.COMPILER; }
-    "IGNORECASE"        { return CocoTypes.IGNORECASE; }
-    "CHARACTERS"        { return CocoTypes.CHARACTERS; }
-    "TOKENS"            { return CocoTypes.TOKENS; }
-    "PRAGMAS"           { return CocoTypes.PRAGMAS; }
-    "COMMENTS"          { return CocoTypes.COMMENTS; }
-    "FROM"              { return CocoTypes.FROM; }
-    "TO"                { return CocoTypes.TO; }
-    "NESTED"            { return CocoTypes.NESTED; }
-    "IGNORE"            { return CocoTypes.IGNORE; }
-    "PRODUCTIONS"       { return CocoTypes.PRODUCTIONS; }
+    "COMPILER"          { return CocoTypes.COMPILER_KEYWORD; }
+    "IGNORECASE"        { return CocoTypes.IGNORECASE_KEYWORD; }
+    "CHARACTERS"        { return CocoTypes.CHARACTERS_KEYWORD; }
+    "TOKENS"            { return CocoTypes.TOKENS_KEYWORD; }
+    "PRAGMAS"           { return CocoTypes.PRAGMAS_KEYWORD; }
+    "COMMENTS"          { return CocoTypes.COMMENTS_KEYWORD; }
+    "FROM"              { return CocoTypes.FROM_KEYWORD; }
+    "TO"                { return CocoTypes.TO_KEYWORD; }
+    "NESTED"            { return CocoTypes.NESTED_KEYWORD; }
+    "IGNORE"            { return CocoTypes.IGNORE_KEYWORD; }
+    "PRODUCTIONS"       { return CocoTypes.PRODUCTIONS_KEYWORD; }
     "="                 { return CocoTypes.EQUALS; }
-    "END"               { return CocoTypes.END; }
+    "END"               { return CocoTypes.END_KEYWORD; }
     "."                 { return CocoTypes.DOT; }
     "+"                 { return CocoTypes.PLUS; }
     "-"                 { return CocoTypes.MINUS; }
     ".."                { return CocoTypes.DOTDOT; }
-    "ANY"               { return CocoTypes.ANY; }
+    "ANY"               { return CocoTypes.ANY_KEYWORD; }
     "<"                 { return CocoTypes.LESS; }
     ">"                 { return CocoTypes.GREATER; }
     "<."                { return CocoTypes.LESSDOT; }
@@ -82,16 +82,16 @@ EndOfLineComment     = "//"[^\r\n]*(\n|\r|\r\n)?
     "(."                { return CocoTypes.INSTR_START; }
     ".)"                { return CocoTypes.INSTR_END; }
     "|"                 { return CocoTypes.OR; }
-    "WEAK"              { return CocoTypes.WEAK; }
+    "WEAK"              { return CocoTypes.WEAK_KEYWORD; }
     "("                 { return CocoTypes.LPAREN; }
     ")"                 { return CocoTypes.RPAREN; }
     "["                 { return CocoTypes.LSPAREN; }
     "]"                 { return CocoTypes.RSPAREN; }
     "{"                 { return CocoTypes.LAPAREN; }
     "}"                 { return CocoTypes.RAPAREN; }
-    "SYNC"              { return CocoTypes.SYNC; }
-    "IF"                { return CocoTypes.IF; }
-    "CONTEXT"           { return CocoTypes.CONTEXT; }
+    "SYNC"              { return CocoTypes.SYNC_KEYWORD; }
+    "IF"                { return CocoTypes.IF_KEYWORD; }
+    "CONTEXT"           { return CocoTypes.CONTEXT_KEYWORD; }
 
     // identifier
     {ident}             { return CocoTypes.IDENT; }

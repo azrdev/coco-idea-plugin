@@ -1,35 +1,38 @@
 {
     parserClass="de.qrdn.coco_idea.CocoParser"
     extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
     psiClassPrefix="Coco"
     psiImplClassSuffix="Impl"
     psiPackage="de.qrdn.coco_idea.psi"
     psiImplPackage="de.qrdn.coco_idea.psi.impl"
+
     elementTypeHolderClass="de.qrdn.coco_idea.psi.CocoTypes"
     elementTypeClass="de.qrdn.coco_idea.psi.CocoElementType"
     tokenTypeClass="de.qrdn.coco_idea.psi.CocoTokenType"
+
     // psiImplUtilClass="de.qrdn.coco_idea.psi.impl.CocoPsiImplUtil"
 
     // tokens are recognized by JFlex lexer, definitions here are only informative / for testing
     tokens = [
-        "COMPILER"
-        "IGNORECASE"
-        "CHARACTERS"
-        "TOKENS"
-        "PRAGMAS"
-        "COMMENTS"
-        "FROM"
-        "TO"
-        "NESTED"
-        "IGNORE"
-        "PRODUCTIONS"
+        COMPILER_KEYWORD="COMPILER"
+        IGNORECASE_KEYWORD="IGNORECASE"
+        CHARACTERS_KEYWORD="CHARACTERS"
+        TOKENS_KEYWORD="TOKENS"
+        PRAGMAS_KEYWORD="PRAGMAS"
+        COMMENTS_KEYWORD="COMMENTS"
+        FROM_KEYWORD="FROM"
+        TO_KEYWORD="TO"
+        NESTED_KEYWORD="NESTED"
+        IGNORE_KEYWORD="IGNORE"
+        PRODUCTIONS_KEYWORD="PRODUCTIONS"
         EQUALS  = "="
-        "END"
+        END_KEYWORD="END"
         DOT     = "."
         PLUS    = "+"
         MINUS   = "-"
         DOTDOT  = ".."
-        "ANY"
+        ANY_KEYWORD="ANY"
         LESS    = "<"
         GREATER = ">"
         LESSDOT = "<."
@@ -37,16 +40,16 @@
         INSTR_START = "(."
         INSTR_END   = ".)"
         OR      = "|"
-        "WEAK"
+        WEAK_KEYWORD="WEAK"
         LPAREN  = "("
         RPAREN  = ")"
         LSPAREN = "["
         RSPAREN = "]"
         LAPAREN = "{"
         RAPAREN = "}"
-        "SYNC"
-        "IF"
-        "CONTEXT"
+        SYNC_KEYWORD="SYNC"
+        IF_KEYWORD="IF"
+        CONTEXT_KEYWORD="CONTEXT"
 
         ident='regexp:[a-zA-Z_][a-zA-Z_0-9]*'
         string='regexp:"[^"]*?"'
@@ -60,46 +63,49 @@
 
 coco_file ::=
     //TODO: instrumentation_code
-    COMPILER ident
-    [ IGNORECASE ]
+    COMPILER_KEYWORD ident_rule
+    [ IGNORECASE_KEYWORD ]
     //TODO: instrumentation_code
-    [ CHARACTERS set_decl* ]
-    [ TOKENS token_decl* ]
-    [ PRAGMAS token_decl* ]
-    { COMMENTS FROM token_expr TO token_expr NESTED? }*
-    { IGNORE set }*
+    [ CHARACTERS ]
+    [ TOKENS ]
+    [ PRAGMAS_KEYWORD token_decl* ]
+    { COMMENTS_KEYWORD FROM_KEYWORD token_expr TO_KEYWORD token_expr NESTED_KEYWORD? }*
+    { IGNORE_KEYWORD set }*
     PRODUCTIONS
-    {
-    ident attr_decl? sem_text? '=' expression '.'
-    }*
-    END ident '.'
+    END_KEYWORD ident_rule '.'
 
-set_decl ::= ident '=' set '.'
+private CHARACTERS ::= CHARACTERS_KEYWORD set_decl*
+private TOKENS ::= TOKENS_KEYWORD token_decl*
+private PRODUCTIONS ::= PRODUCTIONS_KEYWORD production*
+
+set_decl ::= ident_rule '=' set '.'
 set ::= sim_set ('+' sim_set | '-' sim_set)*
-sim_set ::= ident | string | character ['..' character] | ANY
+sim_set ::= ident_rule | string | character ['..' character] | ANY_KEYWORD
 token_decl ::= sym [ '=' token_expr '.' ] [ sem_text ]
 attr_decl ::= '<.' /* instrumentation_code* */ '.>' | '<' /* instrumentation_code* */ '>'
 expression ::= term ( '|' term )*
 term ::= ( [resolver] factor factor* )?
 factor ::=
-        [ WEAK ]
+        [ WEAK_KEYWORD ]
         sym
         [ attribs ]
     | '(' expression ')'
     | '[' expression ']'
     | '{' expression '}'
     | sem_text
-    | ANY
-    | SYNC
-resolver ::= IF '(' condition
-condition ::= ( '(' condition | ANY )* ')' // nesting
+    | ANY_KEYWORD
+    | SYNC_KEYWORD
+resolver ::= IF_KEYWORD '(' condition
+condition ::= ( '(' condition | ANY_KEYWORD )* ')' // nesting
 token_expr ::= token_term ( '|' token_term )*
-token_term ::= token_factor token_factor* [ CONTEXT '(' token_expr ')' ]
+token_term ::= token_factor token_factor* [ CONTEXT_KEYWORD '(' token_expr ')' ]
 token_factor ::=
         sym
     | '(' token_expr ')'
     | '[' token_expr ']'
     | '{' token_expr '}'
-sym ::= ( ident | string | character )
+sym ::= ( ident_rule | string | character )
 attribs ::= '<' /* instrumentation_code* */ '>' | '<.' /* instrumentation_code* */ '.>'
 sem_text ::= '(.' /* instrumentation_code* */ '.)'
+production ::= ident_rule attr_decl? sem_text? '=' expression '.'
+ident_rule ::= ident // just so we have a Psi*Impl class

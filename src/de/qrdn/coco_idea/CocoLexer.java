@@ -699,11 +699,11 @@ class CocoLexer implements FlexLexer {
             }
           case 59: break;
           case 19: 
-            { return CocoTypes.IF;
+            { return CocoTypes.IF_KEYWORD;
             }
           case 60: break;
           case 20: 
-            { return CocoTypes.TO;
+            { return CocoTypes.TO_KEYWORD;
             }
           case 61: break;
           case 21: 
@@ -731,63 +731,63 @@ class CocoLexer implements FlexLexer {
             }
           case 67: break;
           case 27: 
-            { return CocoTypes.END;
+            { return CocoTypes.END_KEYWORD;
             }
           case 68: break;
           case 28: 
-            { return CocoTypes.ANY;
+            { return CocoTypes.ANY_KEYWORD;
             }
           case 69: break;
           case 29: 
-            { return CocoTypes.SYNC;
+            { return CocoTypes.SYNC_KEYWORD;
             }
           case 70: break;
           case 30: 
-            { return CocoTypes.FROM;
+            { return CocoTypes.FROM_KEYWORD;
             }
           case 71: break;
           case 31: 
-            { return CocoTypes.WEAK;
+            { return CocoTypes.WEAK_KEYWORD;
             }
           case 72: break;
           case 32: 
-            { return CocoTypes.IGNORE;
+            { return CocoTypes.IGNORE_KEYWORD;
             }
           case 73: break;
           case 33: 
-            { return CocoTypes.NESTED;
+            { return CocoTypes.NESTED_KEYWORD;
             }
           case 74: break;
           case 34: 
-            { return CocoTypes.TOKENS;
+            { return CocoTypes.TOKENS_KEYWORD;
             }
           case 75: break;
           case 35: 
-            { return CocoTypes.CONTEXT;
+            { return CocoTypes.CONTEXT_KEYWORD;
             }
           case 76: break;
           case 36: 
-            { return CocoTypes.PRAGMAS;
+            { return CocoTypes.PRAGMAS_KEYWORD;
             }
           case 77: break;
           case 37: 
-            { return CocoTypes.COMMENTS;
+            { return CocoTypes.COMMENTS_KEYWORD;
             }
           case 78: break;
           case 38: 
-            { return CocoTypes.COMPILER;
+            { return CocoTypes.COMPILER_KEYWORD;
             }
           case 79: break;
           case 39: 
-            { return CocoTypes.CHARACTERS;
+            { return CocoTypes.CHARACTERS_KEYWORD;
             }
           case 80: break;
           case 40: 
-            { return CocoTypes.IGNORECASE;
+            { return CocoTypes.IGNORECASE_KEYWORD;
             }
           case 81: break;
           case 41: 
-            { return CocoTypes.PRODUCTIONS;
+            { return CocoTypes.PRODUCTIONS_KEYWORD;
             }
           case 82: break;
           default:
