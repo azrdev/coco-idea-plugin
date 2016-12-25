@@ -11,7 +11,7 @@
     elementTypeClass="de.qrdn.coco_idea.psi.CocoElementType"
     tokenTypeClass="de.qrdn.coco_idea.psi.CocoTokenType"
 
-    // psiImplUtilClass="de.qrdn.coco_idea.psi.impl.CocoPsiImplUtil"
+    psiImplUtilClass="de.qrdn.coco_idea.psi.impl.CocoPsiImplUtil"
 
     // tokens are recognized by JFlex lexer, definitions here are only informative / for testing
     tokens = [
@@ -57,6 +57,10 @@
         comment='regexp://.*$|/\*.*\*/' // |\(\..*\.\)
         space='regexp:\s'
     ]
+
+    mixin("set_decl|token_decl|production")="de.qrdn.coco_idea.psi.impl.CocoNamedElementImpl"
+    implements("set_decl|token_decl|production")="de.qrdn.coco_idea.psi.CocoNamedElement"
+    methods("set_decl|token_decl|production")=[getName setName getNameIdentifier]
 }
 
 //TODO: pin,recoverWhile attributes to parse broken files
