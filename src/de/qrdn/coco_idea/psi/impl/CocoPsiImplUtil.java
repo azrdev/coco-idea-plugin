@@ -1,12 +1,12 @@
 package de.qrdn.coco_idea.psi.impl;
 
+import com.intellij.lang.ASTNode;
 import com.intellij.navigation.ItemPresentation;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiReference;
 import com.intellij.util.IncorrectOperationException;
-import de.qrdn.coco_idea.psi.CocoCharacters;
-import de.qrdn.coco_idea.psi.CocoNamedElement;
-import de.qrdn.coco_idea.psi.CocoProductions;
-import de.qrdn.coco_idea.psi.CocoTokens;
+import de.qrdn.coco_idea.CocoReference;
+import de.qrdn.coco_idea.psi.*;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -73,6 +73,46 @@ public class CocoPsiImplUtil {
     //FIXME: setName() implementations
     public static PsiElement setName(CocoNamedElement element, @NonNls @NotNull String s)
             throws IncorrectOperationException {
+        return null;
+    }
+
+    // delegates for CocoIdentRule
+
+    //FIXME: setName() implementations
+    public static PsiElement setName(@NotNull CocoIdentRule element, String s) {
+        return null;
+    }
+
+    public static String getName(@NotNull CocoIdentRule element) {
+        return element.getIdent().getText();
+    }
+
+    public static PsiReference getReference(@NotNull final CocoIdentRule element) {
+        /* find out if identifier is used in character set declarations or token declarations (thus denoting character sets),
+         * or in productions (thus denoting )
+         */
+        ASTNode section;
+        for(section = element.getNode(); section != null; section = section.getTreeParent()) {
+            final PsiElement sectionPsi = section.getPsi();
+            if(sectionPsi instanceof CocoProductions) {
+                return new CocoReference(element) {
+                    @Nullable
+                    @Override
+                    public PsiElement resolve(@NotNull CocoFile containingFile, String referenceName) {
+                        return containingFile.getTokenOrProduction(referenceName);
+                    }
+                };
+            } else if(sectionPsi instanceof CocoTokens ||
+                    sectionPsi instanceof CocoCharacters) {
+                return new CocoReference(element) {
+                    @Nullable
+                    @Override
+                    public PsiElement resolve(@NotNull CocoFile containingFile, String referenceName) {
+                        return containingFile.getCharacterClass(referenceName);
+                    }
+                };
+            }
+        }
         return null;
     }
 

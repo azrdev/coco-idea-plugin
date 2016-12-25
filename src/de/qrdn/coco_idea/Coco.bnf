@@ -61,6 +61,8 @@
     mixin("set_decl|token_decl|production")="de.qrdn.coco_idea.psi.impl.CocoNamedElementImpl"
     implements("set_decl|token_decl|production")="de.qrdn.coco_idea.psi.CocoNamedElement"
     methods("set_decl|token_decl|production")=[getName setName getPresentation getNameIdentifier]
+    implements("ident_rule")="com.intellij.psi.PsiNamedElement"
+    methods("ident_rule")=[getName setName getReference]
     // CocoFileSection used for StructureView
     mixin("CHARACTERS|TOKENS|PRODUCTIONS")="de.qrdn.coco_idea.psi.impl.CocoFileSectionImpl"
     implements("CHARACTERS|TOKENS|PRODUCTIONS")="de.qrdn.coco_idea.psi.CocoFileSection"
