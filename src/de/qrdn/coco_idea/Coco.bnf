@@ -58,9 +58,14 @@
         space='regexp:\s'
     ]
 
+    // CocoNamedElement used for reference resolution
     mixin("set_decl|token_decl|production")="de.qrdn.coco_idea.psi.impl.CocoNamedElementImpl"
     implements("set_decl|token_decl|production")="de.qrdn.coco_idea.psi.CocoNamedElement"
-    methods("set_decl|token_decl|production")=[getName setName getNameIdentifier]
+    methods("set_decl|token_decl|production")=[getName setName getPresentation getNameIdentifier]
+    // CocoFileSection used for StructureView
+    mixin("CHARACTERS|TOKENS|PRODUCTIONS")="de.qrdn.coco_idea.psi.impl.CocoFileSectionImpl"
+    implements("CHARACTERS|TOKENS|PRODUCTIONS")="de.qrdn.coco_idea.psi.CocoFileSection"
+    methods("CHARACTERS|TOKENS|PRODUCTIONS")=[getDeclarations getPresentation]
 }
 
 //TODO: pin,recoverWhile attributes to parse broken files
@@ -78,9 +83,9 @@ coco_file ::=
     PRODUCTIONS
     END_KEYWORD ident_rule '.'
 
-private CHARACTERS ::= CHARACTERS_KEYWORD set_decl*
-private TOKENS ::= TOKENS_KEYWORD token_decl*
-private PRODUCTIONS ::= PRODUCTIONS_KEYWORD production*
+CHARACTERS ::= CHARACTERS_KEYWORD set_decl*
+TOKENS ::= TOKENS_KEYWORD token_decl*
+PRODUCTIONS ::= PRODUCTIONS_KEYWORD production*
 
 set_decl ::= ident_rule '=' set '.'
 set ::= sim_set ('+' sim_set | '-' sim_set)*

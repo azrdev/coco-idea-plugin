@@ -12,3 +12,5 @@ Following the [Custom Language Support Tutorial](http://www.jetbrains.org/intell
 - "register" occurs in plugin.xml
 - for references: methods from .bnf are delegated to psiImplUtilClass, *if signature fits*
 - bnf: methods(nonterminals)=[] are not resolved correctly in "attributes" header
+- bug in `SimpleStructureViewModel.isAlwaysLeaf`: `element instanceof SimpleFile` is always false, it should be `treeElement.psiElement instanceof ...`
+
