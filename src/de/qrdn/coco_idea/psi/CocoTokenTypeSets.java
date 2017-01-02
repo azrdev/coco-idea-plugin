@@ -36,13 +36,7 @@ public interface CocoTokenTypeSets {
             CocoTypes.LAPAREN,
             CocoTypes.RAPAREN,
             CocoTypes.LSPAREN,
-            CocoTypes.RSPAREN,
-            CocoTypes.LESS,
-            CocoTypes.GREATER,
-            CocoTypes.LESSDOT,
-            CocoTypes.GREATERDOT,
-            CocoTypes.INSTR_START,
-            CocoTypes.INSTR_END);
+            CocoTypes.RSPAREN);
 
     TokenSet OPERATORS = TokenSet.create(
             CocoTypes.DOT,

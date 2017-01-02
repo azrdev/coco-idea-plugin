@@ -12,7 +12,7 @@ import com.intellij.psi.TokenType;
 %unicode
 %function advance
 %type IElementType
-/* TODO: trying to test JFlex standalone broken: only prints "null" for EOF token
+/* TODO: trying to test JFlex standalone broken: only prints "null" for EOF token. Should be fixed, see <https://github.com/JetBrains/Grammar-Kit/issues/149>
 %debug
 %{
 
@@ -43,10 +43,29 @@ TraditionalComment   = "/*"[^*]~"*/"|"/*""*"+"/"
 // Comment can be the last line of the file, without line terminator.
 EndOfLineComment     = "//"[^\r\n]*(\n|\r|\r\n)?
 
+%s compiler_decl global_decl coco instrumentation_paren_dot instrumentation_angle instrumentation_angle_dot
+
 %%
 
+/* includes */
 <YYINITIAL> {
-    //TODO: instrumentation_code
+    "COMPILER"          { yybegin(compiler_decl); return CocoTypes.COMPILER_KEYWORD; }
+    [^]                 { return CocoTypes.INSTRUMENTATION_CODE; }
+}
+
+<compiler_decl> {
+    {ident}             { yybegin(global_decl); return CocoTypes.IDENT; }
+}
+
+/* global declaration section */
+<global_decl> {
+    "IGNORECASE"        { yybegin(coco); return CocoTypes.IGNORECASE_KEYWORD; }
+    "CHARACTERS"        { yybegin(coco); return CocoTypes.CHARACTERS_KEYWORD; }
+    [^]                 { return CocoTypes.INSTRUMENTATION_CODE; }
+}
+
+/* coco grammar */
+<coco> {
 
     // base types
     //TODO unused: {number}    { return CocoTypes.NUMBER; }
@@ -68,20 +87,14 @@ EndOfLineComment     = "//"[^\r\n]*(\n|\r|\r\n)?
     "NESTED"            { return CocoTypes.NESTED_KEYWORD; }
     "IGNORE"            { return CocoTypes.IGNORE_KEYWORD; }
     "PRODUCTIONS"       { return CocoTypes.PRODUCTIONS_KEYWORD; }
-    "="                 { return CocoTypes.EQUALS; }
     "END"               { return CocoTypes.END_KEYWORD; }
+    "="                 { return CocoTypes.EQUALS; }
     "."                 { return CocoTypes.DOT; }
     "+"                 { return CocoTypes.PLUS; }
     "-"                 { return CocoTypes.MINUS; }
     ".."                { return CocoTypes.DOTDOT; }
-    "ANY"               { return CocoTypes.ANY_KEYWORD; }
-    "<"                 { return CocoTypes.LESS; }
-    ">"                 { return CocoTypes.GREATER; }
-    "<."                { return CocoTypes.LESSDOT; }
-    ".>"                { return CocoTypes.GREATERDOT; }
-    "(."                { return CocoTypes.INSTR_START; }
-    ".)"                { return CocoTypes.INSTR_END; }
     "|"                 { return CocoTypes.OR; }
+    "ANY"               { return CocoTypes.ANY_KEYWORD; }
     "WEAK"              { return CocoTypes.WEAK_KEYWORD; }
     "("                 { return CocoTypes.LPAREN; }
     ")"                 { return CocoTypes.RPAREN; }
@@ -95,6 +108,28 @@ EndOfLineComment     = "//"[^\r\n]*(\n|\r|\r\n)?
 
     // identifier
     {ident}             { return CocoTypes.IDENT; }
+    // instrumentation code start markers
+    "<"                 { yybegin(instrumentation_angle); }
+    "<."                { yybegin(instrumentation_angle_dot); }
+    "(."                { yybegin(instrumentation_paren_dot); }
+}
+
+// instrumentation, delimited by (. .)
+<instrumentation_paren_dot> {
+    ".)"                { yybegin(coco); }
+    [^]                 { return CocoTypes.INSTRUMENTATION_CODE; }
+}
+
+// instrumentation, delimited by < >
+<instrumentation_angle> {
+    ">"                 { yybegin(coco); }
+    [^]                 { return CocoTypes.INSTRUMENTATION_CODE; }
+}
+
+// instrumentation, delimited by <. .>
+<instrumentation_angle_dot> {
+    ".>"                { yybegin(coco); }
+    [^]                 { return CocoTypes.INSTRUMENTATION_CODE; }
 }
 
 // error fallback

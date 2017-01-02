@@ -26,20 +26,14 @@
         NESTED_KEYWORD="NESTED"
         IGNORE_KEYWORD="IGNORE"
         PRODUCTIONS_KEYWORD="PRODUCTIONS"
-        EQUALS  = "="
         END_KEYWORD="END"
+        EQUALS  = "="
         DOT     = "."
         PLUS    = "+"
         MINUS   = "-"
         DOTDOT  = ".."
-        ANY_KEYWORD="ANY"
-        LESS    = "<"
-        GREATER = ">"
-        LESSDOT = "<."
-        GREATERDOT  = ".>"
-        INSTR_START = "(."
-        INSTR_END   = ".)"
         OR      = "|"
+        ANY_KEYWORD="ANY"
         WEAK_KEYWORD="WEAK"
         LPAREN  = "("
         RPAREN  = ")"
@@ -56,6 +50,8 @@
         character="regexp:'([^\'\\\n\r]|\\\'|\\[\u0020-\u0026\u0028-\u007e]*)'"
         comment='regexp://.*$|/\*.*\*/' // |\(\..*\.\)
         space='regexp:\s'
+
+        INSTRUMENTATION_CODE='regexp:[^]'
     ]
 
     // CocoNamedElement used for reference resolution

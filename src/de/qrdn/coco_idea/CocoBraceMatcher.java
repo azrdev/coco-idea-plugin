@@ -14,9 +14,6 @@ public class CocoBraceMatcher implements PairedBraceMatcher {
             new BracePair(CocoTypes.LPAREN, CocoTypes.RPAREN, false),
             new BracePair(CocoTypes.LAPAREN, CocoTypes.RAPAREN, false),
             new BracePair(CocoTypes.LSPAREN, CocoTypes.RSPAREN, false),
-            new BracePair(CocoTypes.LESS, CocoTypes.GREATER, false),
-            new BracePair(CocoTypes.LESSDOT, CocoTypes.GREATERDOT, false),
-            new BracePair(CocoTypes.INSTR_START, CocoTypes.INSTR_END, false),
     };
 
     @Override
