@@ -12,7 +12,7 @@ import java.util.Map;
 
 
 public class CocoSyntaxHighlighter extends SyntaxHighlighterBase {
-    private static Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
+    private static Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<>();
 
     static {
         fillMap(ATTRIBUTES, CocoTokenTypeSets.KEYWORDS, CocoHighlighterColors.KEYWORD);
@@ -22,6 +22,7 @@ public class CocoSyntaxHighlighter extends SyntaxHighlighterBase {
         fillMap(ATTRIBUTES, CocoTokenTypeSets.PARENTHESES, CocoHighlighterColors.PARENTHESES);
         fillMap(ATTRIBUTES, CocoTokenTypeSets.OPERATORS, CocoHighlighterColors.OPERATORS);
         fillMap(ATTRIBUTES, CocoTokenTypeSets.STRING, CocoHighlighterColors.STRING);
+        fillMap(ATTRIBUTES, CocoTokenTypeSets.INSTRUMENTATION_CODE, CocoHighlighterColors.INSTRUMENTATION_CODE);
     }
 
     @NotNull

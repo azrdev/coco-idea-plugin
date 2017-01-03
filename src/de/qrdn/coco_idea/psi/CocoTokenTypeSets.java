@@ -47,4 +47,6 @@ public interface CocoTokenTypeSets {
             CocoTypes.PLUS);
 
     TokenSet STRING = TokenSet.create(CocoTypes.STRING, CocoTypes.CHARACTER);
+
+    TokenSet INSTRUMENTATION_CODE = TokenSet.create(CocoTypes.INSTRUMENTATION_CODE);
 }

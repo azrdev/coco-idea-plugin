@@ -16,9 +16,11 @@ public interface CocoHighlighterColors {
     TextAttributesKey BAD_CHARACTER =
             createTextAttributesKey("COCO_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
     TextAttributesKey OPERATORS =
-            createTextAttributesKey("COCO_BAD_CHARACTER", DefaultLanguageHighlighterColors.OPERATION_SIGN);
+            createTextAttributesKey("COCO_OPERATORS", DefaultLanguageHighlighterColors.OPERATION_SIGN);
     TextAttributesKey PARENTHESES =
-            createTextAttributesKey("COCO_BAD_CHARACTER", DefaultLanguageHighlighterColors.PARENTHESES);
+            createTextAttributesKey("COCO_PARENTHESES", DefaultLanguageHighlighterColors.PARENTHESES);
     TextAttributesKey STRING =
-            createTextAttributesKey("COCO_BAD_CHARACTER", DefaultLanguageHighlighterColors.STRING);
+            createTextAttributesKey("COCO_STRING", DefaultLanguageHighlighterColors.STRING);
+    TextAttributesKey INSTRUMENTATION_CODE =
+            createTextAttributesKey("COCO_INSTRUMENTATION_CODE", DefaultLanguageHighlighterColors.MARKUP_TAG);
 }
