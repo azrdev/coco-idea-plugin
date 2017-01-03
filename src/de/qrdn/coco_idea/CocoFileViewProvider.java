@@ -32,7 +32,7 @@ public class CocoFileViewProvider
         super(manager, file, physical);
         Language dataLang = TemplateDataLanguageMappings.getInstance(manager.getProject()).getMapping(file);
         if(dataLang == null) {
-            //TODO: set instrumentation lang dependend on IDE, e.g. C++ for CLion
+            //TODO: set instrumentation lang dependent on IDE, e.g. C++ for CLion
             //TODO: let user select instrumentation lang
             dataLang = StdLanguages.JAVA;
         }

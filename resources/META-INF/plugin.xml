@@ -29,7 +29,7 @@
     <fileTypeFactory implementation="de.qrdn.coco_idea.CocoFileTypeFactory"/>
     <lang.parserDefinition language="Coco" implementationClass="de.qrdn.coco_idea.CocoParserDefinition"/>
     <!-- syntax highlighting, comments, braces, StructureView -->
-    <lang.syntaxHighlighterFactory key="Coco" implementationClass="de.qrdn.coco_idea.CocoSyntaxHighlighterFactory"/>
+    <lang.syntaxHighlighterFactory language="Coco" implementationClass="de.qrdn.coco_idea.CocoSyntaxHighlighterFactory"/>
     <lang.commenter language="Coco" implementationClass="de.qrdn.coco_idea.CocoCommenter"/>
     <lang.braceMatcher language="Coco" implementationClass="de.qrdn.coco_idea.CocoBraceMatcher"/>
     <lang.psiStructureViewFactory language="Coco" implementationClass="de.qrdn.coco_idea.CocoStructureViewFactory"/>

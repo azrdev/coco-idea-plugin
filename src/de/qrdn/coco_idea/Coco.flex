@@ -47,6 +47,8 @@ EndOfLineComment     = "//"[^\r\n]*(\n|\r|\r\n)?
 
 %%
 
+//TODO: coco pragmas (^$[A-Z]$)
+
 /* includes */
 <YYINITIAL> {
     "COMPILER"          { yybegin(compiler_decl); return CocoTypes.COMPILER_KEYWORD; }

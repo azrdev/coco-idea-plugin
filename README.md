@@ -7,6 +7,15 @@ Following the [Custom Language Support Tutorial](http://www.jetbrains.org/intell
 
 # TODOs
 - customizable syntax highlighting: [Color Settings Page](http://www.jetbrains.org/intellij/sdk/docs/tutorials/custom_language_support/syntax_highlighter_and_color_settings_page.html)
+    - syntax highlighting: different colors for keywords, charsets, tokens, productions
+- references: see feature branch, maybe <https://github.com/intellij-rust/intellij-rust/tree/master/src/main/kotlin/org/rust/lang/core/resolve/ref> helps
+- PRAGMAs in structure view
+- `$CNF` file header
+- instrumentation language highlighting (it's recognized and assigned, but the IDE only shows plaintext)
+    - `LOG.assertTrue(contentElementType instanceof ILazyParseableElementType, contentElementType);` fails
+- structure view broken with (partially) unparseable file
+
+- templates, "new file", build system integration ...
 
 # Tutorial deficits
 - "register" occurs in plugin.xml
