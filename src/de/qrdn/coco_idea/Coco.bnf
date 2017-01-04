@@ -64,7 +64,7 @@
     methods("CHARACTERS|TOKENS|PRODUCTIONS")=[getDeclarations getPresentation]
 }
 
-//TODO: pin,recoverWhile attributes to parse broken files
+//TODO: more pin, recoverWhile attributes to parse broken files
 
 coco_file ::=
     COMPILER_KEYWORD ident_rule
@@ -76,12 +76,17 @@ coco_file ::=
     { IGNORE_KEYWORD set }*
     PRODUCTIONS
     END_KEYWORD ident_rule '.'
+  {pin=11}
 
 CHARACTERS ::= CHARACTERS_KEYWORD set_decl*
+  {pin=1}
 TOKENS ::= TOKENS_KEYWORD token_decl*
+  {pin=1}
 PRODUCTIONS ::= PRODUCTIONS_KEYWORD production*
+  {pin=1}
 
 set_decl ::= ident_rule '=' set '.'
+  {pin=4}
 set ::= sim_set ('+' sim_set | '-' sim_set)*
 sim_set ::= ident_rule | string | character ['..' character] | ANY_KEYWORD
 token_decl ::= sym [ '=' token_expr '.' ] [ sem_text ]
@@ -99,9 +104,12 @@ factor ::=
     | ANY_KEYWORD
     | SYNC_KEYWORD
 resolver ::= IF_KEYWORD '(' condition
+  {pin=1}
 condition ::= ( '(' condition | ANY_KEYWORD )* ')' // nesting
 token_expr ::= token_term ( '|' token_term )*
+  {pin=1}
 token_term ::= token_factor token_factor* [ CONTEXT_KEYWORD '(' token_expr ')' ]
+  {pin=1}
 token_factor ::=
         sym
     | '(' token_expr ')'
@@ -111,4 +119,5 @@ sym ::= ( ident_rule | string | character )
 attribs ::= // '<' /* instrumentation_code* */ '>' | '<.' /* instrumentation_code* */ '.>'
 sem_text ::= // '(.' /* instrumentation_code* */ '.)'
 production ::= ident_rule attr_decl? sem_text? '=' expression '.'
+  {pin=4}
 ident_rule ::= ident // just so we have a Psi*Impl class
