@@ -33,8 +33,6 @@
     <lang.commenter language="Coco" implementationClass="de.qrdn.coco_idea.CocoCommenter"/>
     <lang.braceMatcher language="Coco" implementationClass="de.qrdn.coco_idea.CocoBraceMatcher"/>
     <lang.psiStructureViewFactory language="Coco" implementationClass="de.qrdn.coco_idea.CocoStructureViewFactory"/>
-    <!-- instrumentation code -->
-    <lang.fileViewProviderFactory language="Coco" implementationClass="de.qrdn.coco_idea.CocoFileViewProviderFactory"/>
   </extensions>
 
   <actions>
