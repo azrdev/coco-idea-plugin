@@ -43,7 +43,7 @@ TraditionalComment   = "/*"[^*]~"*/"|"/*""*"+"/"
 // Comment can be the last line of the file, without line terminator.
 EndOfLineComment     = "//"[^\r\n]*(\n|\r|\r\n)?
 
-%s compiler_decl global_decl coco instrumentation_paren_dot instrumentation_angle instrumentation_angle_dot
+%s compiler_decl global_decl coco
 
 %%
 
@@ -51,19 +51,23 @@ EndOfLineComment     = "//"[^\r\n]*(\n|\r|\r\n)?
 
 /* includes */
 <YYINITIAL> {
-    "COMPILER"          { yybegin(compiler_decl); return CocoTypes.COMPILER_KEYWORD; }
-    [^]                 { return CocoTypes.INSTRUMENTATION_CODE; }
+    // this pushback-construct ensures the whole instrumentation_code block is returned as a single token
+    "COMPILER"          { yypushback(yylength()); yybegin(compiler_decl); return CocoTypes.INSTRUMENTATION_CODE; }
+    [^]                 { }
 }
 
 <compiler_decl> {
+    "COMPILER"          { return CocoTypes.COMPILER_KEYWORD; }
     {ident}             { yybegin(global_decl); return CocoTypes.IDENT; }
+    {white_space}       { return TokenType.WHITE_SPACE; }
 }
 
 /* global declaration section */
 <global_decl> {
-    "IGNORECASE"        { yybegin(coco); return CocoTypes.IGNORECASE_KEYWORD; }
-    "CHARACTERS"        { yybegin(coco); return CocoTypes.CHARACTERS_KEYWORD; }
-    [^]                 { return CocoTypes.INSTRUMENTATION_CODE; }
+    // this pushback-construct ensures the whole instrumentation_code block is returned as a single token
+    "IGNORECASE"        { yypushback(yylength()); yybegin(coco); return CocoTypes.INSTRUMENTATION_CODE; }
+    "CHARACTERS"        { yypushback(yylength()); yybegin(coco); return CocoTypes.INSTRUMENTATION_CODE; }
+    [^]                 { }
 }
 
 /* coco grammar */
@@ -75,6 +79,7 @@ EndOfLineComment     = "//"[^\r\n]*(\n|\r|\r\n)?
     {char}              { return CocoTypes.CHARACTER; }
     //TODO: pragmas
     {white_space}       { return TokenType.WHITE_SPACE; }
+    //TODO: Coco lexer finds comments in instrumentation code, too, but this way it's simpler for us here
     {Comment}           { return CocoTypes.COMMENT; }
 
     // keywords
@@ -107,31 +112,17 @@ EndOfLineComment     = "//"[^\r\n]*(\n|\r|\r\n)?
     "SYNC"              { return CocoTypes.SYNC_KEYWORD; }
     "IF"                { return CocoTypes.IF_KEYWORD; }
     "CONTEXT"           { return CocoTypes.CONTEXT_KEYWORD; }
+    // actually, these are already found in <global_decl>, but then pushed back
+    "IGNORECASE"        { return CocoTypes.IGNORECASE_KEYWORD; }
+    "CHARACTERS"        { return CocoTypes.CHARACTERS_KEYWORD; }
 
     // identifier
     {ident}             { return CocoTypes.IDENT; }
-    // instrumentation code start markers
-    "<"                 { yybegin(instrumentation_angle); }
-    "<."                { yybegin(instrumentation_angle_dot); }
-    "(."                { yybegin(instrumentation_paren_dot); }
-}
 
-// instrumentation, delimited by (. .)
-<instrumentation_paren_dot> {
-    ".)"                { yybegin(coco); }
-    [^]                 { return CocoTypes.INSTRUMENTATION_CODE; }
-}
-
-// instrumentation, delimited by < >
-<instrumentation_angle> {
-    ">"                 { yybegin(coco); }
-    [^]                 { return CocoTypes.INSTRUMENTATION_CODE; }
-}
-
-// instrumentation, delimited by <. .>
-<instrumentation_angle_dot> {
-    ".>"                { yybegin(coco); }
-    [^]                 { return CocoTypes.INSTRUMENTATION_CODE; }
+    // instrumentation code
+    "<" ~">"            { return CocoTypes.INSTRUMENTATION_CODE; }
+    "<." ~".>"          { return CocoTypes.INSTRUMENTATION_CODE; }
+    "(." ~".)"          { return CocoTypes.INSTRUMENTATION_CODE; }
 }
 
 // error fallback
