@@ -118,9 +118,9 @@ int resolver_brace_depth = 0;
     {ident}             { return CocoTypes.IDENT; }
 
     // instrumentation code
-    "<" ~">"            { return CocoTypes.INSTRUMENTATION_CODE; }
-    "<." ~".>"          { return CocoTypes.INSTRUMENTATION_CODE; }
-    "(." ~".)"          { return CocoTypes.INSTRUMENTATION_CODE; }
+    "<" ~">"            { return CocoTypes.INSTRUMENTATION_CODE_ANGLE; }
+    "<." ~".>"          { return CocoTypes.INSTRUMENTATION_CODE_ANGLEDOT; }
+    "(." ~".)"          { return CocoTypes.INSTRUMENTATION_CODE_PARENDOT; }
 }
 
 <pre_resolver> {

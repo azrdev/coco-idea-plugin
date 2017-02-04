@@ -52,6 +52,9 @@
         space='regexp:\s'
 
         INSTRUMENTATION_CODE='regexp:[^]'
+        INSTRUMENTATION_CODE_PARENDOT='regexp:(\.[^]*\.)'
+        INSTRUMENTATION_CODE_ANGLE='regexp:<[^]*>'
+        INSTRUMENTATION_CODE_ANGLEDOT='regexp:<\.[^]*\.>'
     ]
 
     // CocoNamedElement used for reference resolution
@@ -119,7 +122,7 @@ set_decl ::= ident_rule '=' set '.'
 set ::= sim_set ('+' sim_set | '-' sim_set)*
 sim_set ::= ident_rule | string | character ['..' character] | ANY_KEYWORD
 token_decl ::= sym [ '=' token_expr '.' ] [ sem_text ]
-private attr_decl ::= INSTRUMENTATION_CODE // '<.' /* instrumentation_code* */ '.>' | '<' /* instrumentation_code* */ '>'
+private attr_decl ::= INSTRUMENTATION_CODE_ANGLE | INSTRUMENTATION_CODE_ANGLEDOT
 expression ::= term ( '|' term )*
 term ::= ( [resolver_rule] factor factor* )?
 factor ::=
@@ -142,8 +145,8 @@ token_factor ::=
     | '[' token_expr ']'
     | '{' token_expr '}'
 sym ::= ( ident_rule | string | character )
-private attribs ::= INSTRUMENTATION_CODE // '<' /* instrumentation_code* */ '>' | '<.' /* instrumentation_code* */ '.>'
-private sem_text ::= INSTRUMENTATION_CODE // '(.' /* instrumentation_code* */ '.)'
+private attribs ::= INSTRUMENTATION_CODE_ANGLE | INSTRUMENTATION_CODE_ANGLEDOT
+private sem_text ::= INSTRUMENTATION_CODE_PARENDOT
 production ::= ident_rule attr_decl? sem_text? '=' expression '.'
   {pin=4}
 

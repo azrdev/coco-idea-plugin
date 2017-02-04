@@ -79,13 +79,14 @@ class CocoLexer implements FlexLexer {
     "\3\0\1\31\1\0\1\3\2\0\1\32\1\0\2\25"+
     "\1\0\6\5\1\33\1\5\1\34\4\5\2\0\1\31"+
     "\1\0\1\3\2\0\10\5\1\35\1\5\1\36\1\37"+
-    "\3\0\1\3\2\0\11\5\1\0\1\3\2\0\6\5"+
-    "\1\40\1\41\1\42\1\0\1\3\2\0\2\5\1\43"+
-    "\2\5\1\44\1\5\1\45\1\46\2\0\1\47\1\46"+
-    "\3\5\2\0\3\5\1\50\1\51\1\5\1\52\1\53";
+    "\1\40\3\0\1\3\2\0\11\5\1\41\1\0\1\3"+
+    "\2\0\6\5\1\42\1\43\1\44\1\0\1\3\2\0"+
+    "\2\5\1\45\2\5\1\46\1\5\1\47\1\50\2\0"+
+    "\1\51\1\50\3\5\2\0\3\5\1\52\1\53\1\5"+
+    "\1\54\1\55";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[170];
+    int [] result = new int[172];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -124,17 +125,17 @@ class CocoLexer implements FlexLexer {
     "\0\u0270\0\u0c90\0\u0cc0\0\u0cf0\0\u0d20\0\u0d50\0\u0d80\0\u0db0"+
     "\0\u0de0\0\u0e10\0\u0e40\0\u0e70\0\u0ea0\0\u0ed0\0\u0f00\0\u0f30"+
     "\0\u0f60\0\u0f90\0\u0fc0\0\u0ff0\0\u0270\0\u1020\0\u0270\0\u0270"+
-    "\0\u0db0\0\u1050\0\u1080\0\u10b0\0\u10e0\0\u1110\0\u1140\0\u1170"+
-    "\0\u11a0\0\u11d0\0\u1200\0\u1230\0\u1260\0\u1290\0\u12c0\0\u12f0"+
-    "\0\u1320\0\u1350\0\u1380\0\u13b0\0\u13e0\0\u1410\0\u1440\0\u1470"+
-    "\0\u14a0\0\u14d0\0\u0270\0\u0270\0\u1500\0\u1530\0\u1560\0\u1590"+
-    "\0\u15c0\0\u15f0\0\u0270\0\u1620\0\u1650\0\u0270\0\u1680\0\u0120"+
-    "\0\u0180\0\u16b0\0\u16e0\0\u0270\0\u0270\0\u1710\0\u1740\0\u1770"+
-    "\0\u17a0\0\u17d0\0\u1800\0\u1830\0\u1860\0\u0120\0\u0270\0\u1890"+
-    "\0\u0270\0\u0270";
+    "\0\u0120\0\u0db0\0\u1050\0\u1080\0\u10b0\0\u10e0\0\u1110\0\u1140"+
+    "\0\u1170\0\u11a0\0\u11d0\0\u1200\0\u1230\0\u1260\0\u1290\0\u12c0"+
+    "\0\u0120\0\u12f0\0\u1320\0\u1350\0\u1380\0\u13b0\0\u13e0\0\u1410"+
+    "\0\u1440\0\u1470\0\u14a0\0\u14d0\0\u0270\0\u0270\0\u1500\0\u1530"+
+    "\0\u1560\0\u1590\0\u15c0\0\u15f0\0\u0270\0\u1620\0\u1650\0\u0270"+
+    "\0\u1680\0\u0120\0\u0180\0\u16b0\0\u16e0\0\u0270\0\u0270\0\u1710"+
+    "\0\u1740\0\u1770\0\u17a0\0\u17d0\0\u1800\0\u1830\0\u1860\0\u0120"+
+    "\0\u0270\0\u1890\0\u0270\0\u0270";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[170];
+    int [] result = new int[172];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -236,72 +237,72 @@ class CocoLexer implements FlexLexer {
     "\1\17\5\0\2\17\1\157\17\17\4\0\3\17\6\0"+
     "\1\17\3\0\2\17\5\0\1\17\5\0\16\17\1\160"+
     "\3\17\4\0\3\17\6\0\1\17\2\0\41\104\1\136"+
-    "\6\104\1\107\7\104\41\106\1\137\15\106\1\107\41\161"+
-    "\1\162\16\161\22\0\1\163\36\0\2\12\5\0\1\12"+
-    "\5\0\4\12\1\164\15\12\4\0\3\12\6\0\1\12"+
-    "\32\0\1\165\54\0\1\166\33\0\2\17\5\0\1\17"+
-    "\5\0\6\17\1\167\13\17\4\0\3\17\6\0\1\17"+
-    "\3\0\2\17\5\0\1\17\5\0\4\17\1\170\15\17"+
+    "\6\104\1\161\7\104\41\106\1\137\15\106\1\107\41\162"+
+    "\1\163\16\162\22\0\1\164\36\0\2\12\5\0\1\12"+
+    "\5\0\4\12\1\165\15\12\4\0\3\12\6\0\1\12"+
+    "\32\0\1\166\54\0\1\167\33\0\2\17\5\0\1\17"+
+    "\5\0\6\17\1\170\13\17\4\0\3\17\6\0\1\17"+
+    "\3\0\2\17\5\0\1\17\5\0\4\17\1\171\15\17"+
     "\4\0\3\17\6\0\1\17\3\0\2\17\5\0\1\17"+
-    "\5\0\6\17\1\171\13\17\4\0\3\17\6\0\1\17"+
-    "\3\0\2\17\5\0\1\17\5\0\12\17\1\172\7\17"+
+    "\5\0\6\17\1\172\13\17\4\0\3\17\6\0\1\17"+
+    "\3\0\2\17\5\0\1\17\5\0\12\17\1\173\7\17"+
     "\4\0\3\17\6\0\1\17\3\0\2\17\5\0\1\17"+
-    "\5\0\21\17\1\173\4\0\3\17\6\0\1\17\3\0"+
-    "\2\17\5\0\1\17\5\0\2\17\1\174\17\17\4\0"+
+    "\5\0\21\17\1\174\4\0\3\17\6\0\1\17\3\0"+
+    "\2\17\5\0\1\17\5\0\2\17\1\175\17\17\4\0"+
     "\3\17\6\0\1\17\3\0\2\17\5\0\1\17\5\0"+
-    "\7\17\1\175\12\17\4\0\3\17\6\0\1\17\3\0"+
-    "\2\17\5\0\1\17\5\0\6\17\1\176\13\17\4\0"+
+    "\7\17\1\176\12\17\4\0\3\17\6\0\1\17\3\0"+
+    "\2\17\5\0\1\17\5\0\6\17\1\177\13\17\4\0"+
     "\3\17\6\0\1\17\3\0\2\17\5\0\1\17\5\0"+
-    "\11\17\1\177\10\17\4\0\3\17\6\0\1\17\2\0"+
-    "\41\161\1\162\15\161\1\107\23\0\1\200\35\0\2\12"+
-    "\5\0\1\12\5\0\5\12\1\201\14\12\4\0\3\12"+
-    "\6\0\1\12\20\0\1\202\65\0\1\203\34\0\2\17"+
-    "\5\0\1\17\5\0\11\17\1\204\10\17\4\0\3\17"+
+    "\11\17\1\200\10\17\4\0\3\17\6\0\1\17\2\0"+
+    "\41\162\1\163\15\162\1\201\23\0\1\202\35\0\2\12"+
+    "\5\0\1\12\5\0\5\12\1\203\14\12\4\0\3\12"+
+    "\6\0\1\12\20\0\1\204\65\0\1\205\34\0\2\17"+
+    "\5\0\1\17\5\0\11\17\1\206\10\17\4\0\3\17"+
     "\6\0\1\17\3\0\2\17\5\0\1\17\5\0\5\17"+
-    "\1\205\14\17\4\0\3\17\6\0\1\17\3\0\2\17"+
-    "\5\0\1\17\5\0\22\17\4\0\3\17\6\0\1\206"+
-    "\3\0\2\17\5\0\1\17\5\0\1\207\21\17\4\0"+
+    "\1\207\14\17\4\0\3\17\6\0\1\17\3\0\2\17"+
+    "\5\0\1\17\5\0\22\17\4\0\3\17\6\0\1\210"+
+    "\3\0\2\17\5\0\1\17\5\0\1\211\21\17\4\0"+
     "\3\17\6\0\1\17\3\0\2\17\5\0\1\17\5\0"+
-    "\1\210\21\17\4\0\3\17\6\0\1\17\3\0\2\17"+
-    "\5\0\1\17\5\0\12\17\1\211\7\17\4\0\3\17"+
+    "\1\212\21\17\4\0\3\17\6\0\1\17\3\0\2\17"+
+    "\5\0\1\17\5\0\12\17\1\213\7\17\4\0\3\17"+
     "\6\0\1\17\3\0\2\17\5\0\1\17\5\0\6\17"+
-    "\1\212\13\17\4\0\3\17\6\0\1\17\3\0\2\17"+
-    "\5\0\1\17\5\0\20\17\1\213\1\17\4\0\3\17"+
+    "\1\214\13\17\4\0\3\17\6\0\1\17\3\0\2\17"+
+    "\5\0\1\17\5\0\20\17\1\215\1\17\4\0\3\17"+
     "\6\0\1\17\3\0\2\17\5\0\1\17\5\0\13\17"+
-    "\1\214\6\17\4\0\3\17\6\0\1\17\26\0\1\215"+
-    "\34\0\2\12\5\0\1\12\5\0\6\12\1\216\13\12"+
-    "\4\0\3\12\6\0\1\12\35\0\1\217\42\0\1\220"+
-    "\42\0\2\17\5\0\1\17\5\0\15\17\1\221\4\17"+
+    "\1\216\6\17\4\0\3\17\6\0\1\17\26\0\1\217"+
+    "\34\0\2\12\5\0\1\12\5\0\6\12\1\220\13\12"+
+    "\4\0\3\12\6\0\1\12\35\0\1\221\42\0\1\222"+
+    "\42\0\2\17\5\0\1\17\5\0\15\17\1\223\4\17"+
     "\4\0\3\17\6\0\1\17\3\0\2\17\5\0\1\17"+
-    "\5\0\6\17\1\222\13\17\4\0\3\17\6\0\1\17"+
-    "\3\0\2\17\5\0\1\17\5\0\15\17\1\223\4\17"+
-    "\4\0\3\17\6\0\1\17\3\0\2\17\5\0\1\17"+
-    "\5\0\15\17\1\224\4\17\4\0\3\17\6\0\1\17"+
+    "\5\0\6\17\1\224\13\17\4\0\3\17\6\0\1\17"+
     "\3\0\2\17\5\0\1\17\5\0\15\17\1\225\4\17"+
     "\4\0\3\17\6\0\1\17\3\0\2\17\5\0\1\17"+
-    "\5\0\13\17\1\226\6\17\4\0\3\17\6\0\1\17"+
-    "\3\0\2\17\5\0\1\17\5\0\1\227\21\17\4\0"+
-    "\3\17\6\0\1\17\27\0\1\230\33\0\2\12\5\0"+
-    "\1\12\5\0\7\12\1\231\12\12\4\0\3\12\6\0"+
-    "\1\12\26\0\1\232\63\0\1\233\30\0\2\17\5\0"+
-    "\1\17\5\0\13\17\1\234\6\17\4\0\3\17\6\0"+
-    "\1\17\3\0\2\17\5\0\1\17\5\0\7\17\1\235"+
+    "\5\0\15\17\1\226\4\17\4\0\3\17\6\0\1\17"+
+    "\3\0\2\17\5\0\1\17\5\0\15\17\1\227\4\17"+
+    "\4\0\3\17\6\0\1\17\3\0\2\17\5\0\1\17"+
+    "\5\0\13\17\1\230\6\17\4\0\3\17\6\0\1\17"+
+    "\3\0\2\17\5\0\1\17\5\0\1\231\21\17\4\0"+
+    "\3\17\6\0\1\17\27\0\1\232\33\0\2\12\5\0"+
+    "\1\12\5\0\7\12\1\233\12\12\4\0\3\12\6\0"+
+    "\1\12\26\0\1\234\63\0\1\235\30\0\2\17\5\0"+
+    "\1\17\5\0\13\17\1\236\6\17\4\0\3\17\6\0"+
+    "\1\17\3\0\2\17\5\0\1\17\5\0\7\17\1\237"+
     "\12\17\4\0\3\17\6\0\1\17\3\0\2\17\5\0"+
-    "\1\17\5\0\6\17\1\236\13\17\4\0\3\17\6\0"+
-    "\1\17\3\0\2\17\5\0\1\17\5\0\4\17\1\237"+
+    "\1\17\5\0\6\17\1\240\13\17\4\0\3\17\6\0"+
+    "\1\17\3\0\2\17\5\0\1\17\5\0\4\17\1\241"+
     "\15\17\4\0\3\17\6\0\1\17\3\0\2\17\5\0"+
-    "\1\17\5\0\12\17\1\240\7\17\4\0\3\17\6\0"+
-    "\1\17\27\0\1\241\63\0\1\242\27\0\2\17\5\0"+
-    "\1\17\5\0\7\17\1\243\12\17\4\0\3\17\6\0"+
-    "\1\17\3\0\2\17\5\0\1\17\5\0\1\17\1\244"+
+    "\1\17\5\0\12\17\1\242\7\17\4\0\3\17\6\0"+
+    "\1\17\27\0\1\243\63\0\1\244\27\0\2\17\5\0"+
+    "\1\17\5\0\7\17\1\245\12\17\4\0\3\17\6\0"+
+    "\1\17\3\0\2\17\5\0\1\17\5\0\1\17\1\246"+
     "\20\17\4\0\3\17\6\0\1\17\3\0\2\17\5\0"+
-    "\1\17\5\0\13\17\1\245\6\17\4\0\3\17\6\0"+
-    "\1\17\33\0\1\246\52\0\1\246\34\0\2\17\5\0"+
     "\1\17\5\0\13\17\1\247\6\17\4\0\3\17\6\0"+
-    "\1\17\3\0\2\17\5\0\1\17\5\0\11\17\1\250"+
+    "\1\17\33\0\1\250\52\0\1\250\34\0\2\17\5\0"+
+    "\1\17\5\0\13\17\1\251\6\17\4\0\3\17\6\0"+
+    "\1\17\3\0\2\17\5\0\1\17\5\0\11\17\1\252"+
     "\10\17\4\0\3\17\6\0\1\17\3\0\2\17\5\0"+
-    "\1\17\5\0\6\17\1\251\13\17\4\0\3\17\6\0"+
-    "\1\17\3\0\2\17\5\0\1\17\5\0\13\17\1\252"+
+    "\1\17\5\0\6\17\1\253\13\17\4\0\3\17\6\0"+
+    "\1\17\3\0\2\17\5\0\1\17\5\0\13\17\1\254"+
     "\6\17\4\0\3\17\6\0\1\17\2\0";
 
   private static int [] zzUnpackTrans() {
@@ -347,13 +348,13 @@ class CocoLexer implements FlexLexer {
     "\3\1\5\11\1\1\3\11\1\0\1\1\3\0\1\11"+
     "\3\0\1\1\1\0\13\1\1\11\1\1\3\0\1\11"+
     "\1\0\1\1\2\0\1\11\1\0\1\1\1\11\1\0"+
-    "\15\1\2\0\1\1\1\0\1\1\2\0\14\1\3\0"+
-    "\1\1\2\0\11\1\1\0\1\1\2\0\11\1\1\0"+
-    "\1\1\2\0\7\1\1\11\1\1\2\0\5\1\2\0"+
-    "\3\1\1\11\4\1";
+    "\15\1\2\0\1\1\1\0\1\1\2\0\14\1\1\11"+
+    "\3\0\1\1\2\0\11\1\1\11\1\0\1\1\2\0"+
+    "\11\1\1\0\1\1\2\0\7\1\1\11\1\1\2\0"+
+    "\5\1\2\0\3\1\1\11\4\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[170];
+    int [] result = new int[172];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -679,260 +680,272 @@ int resolver_brace_depth = 0;
             System.out.println("action [54] {  }");
             { 
             }
-          case 44: break;
+          case 46: break;
           case 2: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [141] { return TokenType.BAD_CHARACTER; }");
             { return TokenType.BAD_CHARACTER;
             }
-          case 45: break;
+          case 47: break;
           case 3: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [59] { yybegin(global_decl); return CocoTypes.IDENT; }");
             { yybegin(global_decl); return CocoTypes.IDENT;
             }
-          case 46: break;
+          case 48: break;
           case 4: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [60] { return TokenType.WHITE_SPACE; }");
             { return TokenType.WHITE_SPACE;
             }
-          case 47: break;
+          case 49: break;
           case 5: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [118] { return CocoTypes.IDENT; }");
             { return CocoTypes.IDENT;
             }
-          case 48: break;
+          case 50: break;
           case 6: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [96] { return CocoTypes.EQUALS; }");
             { return CocoTypes.EQUALS;
             }
-          case 49: break;
+          case 51: break;
           case 7: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [97] { return CocoTypes.DOT; }");
             { return CocoTypes.DOT;
             }
-          case 50: break;
+          case 52: break;
           case 8: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [98] { return CocoTypes.PLUS; }");
             { return CocoTypes.PLUS;
             }
-          case 51: break;
+          case 53: break;
           case 9: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [99] { return CocoTypes.MINUS; }");
             { return CocoTypes.MINUS;
             }
-          case 52: break;
+          case 54: break;
           case 10: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [101] { return CocoTypes.OR; }");
             { return CocoTypes.OR;
             }
-          case 53: break;
+          case 55: break;
           case 11: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [104] { return CocoTypes.LPAREN; }");
             { return CocoTypes.LPAREN;
             }
-          case 54: break;
+          case 56: break;
           case 12: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [105] { return CocoTypes.RPAREN; }");
             { return CocoTypes.RPAREN;
             }
-          case 55: break;
+          case 57: break;
           case 13: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [106] { return CocoTypes.LSPAREN; }");
             { return CocoTypes.LSPAREN;
             }
-          case 56: break;
+          case 58: break;
           case 14: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [107] { return CocoTypes.RSPAREN; }");
             { return CocoTypes.RSPAREN;
             }
-          case 57: break;
+          case 59: break;
           case 15: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [108] { return CocoTypes.LAPAREN; }");
             { return CocoTypes.LAPAREN;
             }
-          case 58: break;
+          case 60: break;
           case 16: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [109] { return CocoTypes.RAPAREN; }");
             { return CocoTypes.RAPAREN;
             }
-          case 59: break;
+          case 61: break;
           case 17: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [128] { yybegin(resolver); }");
             { yybegin(resolver);
             }
-          case 60: break;
+          case 62: break;
           case 18: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [132] { ++resolver_brace_depth; }");
             { ++resolver_brace_depth;
             }
-          case 61: break;
+          case 63: break;
           case 19: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [133] { if(resolver_brace_depth <= 0) { yybegin(coco); return CocoTypes.RESOLVER; }"+ZZ_NL+"                          --resolver_brace_depth; }");
             { if(resolver_brace_depth <= 0) { yybegin(coco); return CocoTypes.RESOLVER; }
                           --resolver_brace_depth;
             }
-          case 62: break;
+          case 64: break;
           case 20: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [76] { return CocoTypes.STRING; }");
             { return CocoTypes.STRING;
             }
-          case 63: break;
+          case 65: break;
           case 21: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [81] { return CocoTypes.COMMENT; }");
             { return CocoTypes.COMMENT;
             }
-          case 64: break;
+          case 66: break;
           case 22: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [111] { yybegin(pre_resolver); resolver_brace_depth = 0; }");
             { yybegin(pre_resolver); resolver_brace_depth = 0;
             }
-          case 65: break;
+          case 67: break;
           case 23: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [91] { return CocoTypes.TO_KEYWORD; }");
             { return CocoTypes.TO_KEYWORD;
             }
-          case 66: break;
+          case 68: break;
           case 24: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [100] { return CocoTypes.DOTDOT; }");
             { return CocoTypes.DOTDOT;
             }
-          case 67: break;
+          case 69: break;
           case 25: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [121] { return CocoTypes.INSTRUMENTATION_CODE; }");
-            { return CocoTypes.INSTRUMENTATION_CODE;
+            System.out.println("action [121] { return CocoTypes.INSTRUMENTATION_CODE_ANGLE; }");
+            { return CocoTypes.INSTRUMENTATION_CODE_ANGLE;
             }
-          case 68: break;
+          case 70: break;
           case 26: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [77] { return CocoTypes.CHARACTER; }");
             { return CocoTypes.CHARACTER;
             }
-          case 69: break;
+          case 71: break;
           case 27: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [95] { return CocoTypes.END_KEYWORD; }");
             { return CocoTypes.END_KEYWORD;
             }
-          case 70: break;
+          case 72: break;
           case 28: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [102] { return CocoTypes.ANY_KEYWORD; }");
             { return CocoTypes.ANY_KEYWORD;
             }
-          case 71: break;
+          case 73: break;
           case 29: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [110] { return CocoTypes.SYNC_KEYWORD; }");
             { return CocoTypes.SYNC_KEYWORD;
             }
-          case 72: break;
+          case 74: break;
           case 30: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [90] { return CocoTypes.FROM_KEYWORD; }");
             { return CocoTypes.FROM_KEYWORD;
             }
-          case 73: break;
+          case 75: break;
           case 31: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [103] { return CocoTypes.WEAK_KEYWORD; }");
             { return CocoTypes.WEAK_KEYWORD;
             }
-          case 74: break;
+          case 76: break;
           case 32: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [123] { return CocoTypes.INSTRUMENTATION_CODE_PARENDOT; }");
+            { return CocoTypes.INSTRUMENTATION_CODE_PARENDOT;
+            }
+          case 77: break;
+          case 33: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [122] { return CocoTypes.INSTRUMENTATION_CODE_ANGLEDOT; }");
+            { return CocoTypes.INSTRUMENTATION_CODE_ANGLEDOT;
+            }
+          case 78: break;
+          case 34: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [93] { return CocoTypes.IGNORE_KEYWORD; }");
             { return CocoTypes.IGNORE_KEYWORD;
             }
-          case 75: break;
-          case 33: 
+          case 79: break;
+          case 35: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [92] { return CocoTypes.NESTED_KEYWORD; }");
             { return CocoTypes.NESTED_KEYWORD;
             }
-          case 76: break;
-          case 34: 
+          case 80: break;
+          case 36: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [87] { return CocoTypes.TOKENS_KEYWORD; }");
             { return CocoTypes.TOKENS_KEYWORD;
             }
-          case 77: break;
-          case 35: 
+          case 81: break;
+          case 37: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [112] { return CocoTypes.CONTEXT_KEYWORD; }");
             { return CocoTypes.CONTEXT_KEYWORD;
             }
-          case 78: break;
-          case 36: 
+          case 82: break;
+          case 38: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [88] { return CocoTypes.PRAGMAS_KEYWORD; }");
             { return CocoTypes.PRAGMAS_KEYWORD;
             }
-          case 79: break;
-          case 37: 
+          case 83: break;
+          case 39: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [53] { yypushback(yylength()); yybegin(compiler_decl); return CocoTypes.INSTRUMENTATION_CODE; }");
             { yypushback(yylength()); yybegin(compiler_decl); return CocoTypes.INSTRUMENTATION_CODE;
             }
-          case 80: break;
-          case 38: 
+          case 84: break;
+          case 40: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [58] { return CocoTypes.COMPILER_KEYWORD; }");
             { return CocoTypes.COMPILER_KEYWORD;
             }
-          case 81: break;
-          case 39: 
+          case 85: break;
+          case 41: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [89] { return CocoTypes.COMMENTS_KEYWORD; }");
             { return CocoTypes.COMMENTS_KEYWORD;
             }
-          case 82: break;
-          case 40: 
+          case 86: break;
+          case 42: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [67] { yypushback(yylength()); yybegin(coco); return CocoTypes.INSTRUMENTATION_CODE; }");
             { yypushback(yylength()); yybegin(coco); return CocoTypes.INSTRUMENTATION_CODE;
             }
-          case 83: break;
-          case 41: 
+          case 87: break;
+          case 43: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [86] { return CocoTypes.CHARACTERS_KEYWORD; }");
             { return CocoTypes.CHARACTERS_KEYWORD;
             }
-          case 84: break;
-          case 42: 
+          case 88: break;
+          case 44: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [85] { return CocoTypes.IGNORECASE_KEYWORD; }");
             { return CocoTypes.IGNORECASE_KEYWORD;
             }
-          case 85: break;
-          case 43: 
+          case 89: break;
+          case 45: 
             System.out.println("match: --"+zzToPrintable(yytext())+"--");
             System.out.println("action [94] { return CocoTypes.PRODUCTIONS_KEYWORD; }");
             { return CocoTypes.PRODUCTIONS_KEYWORD;
             }
-          case 86: break;
+          case 90: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }

@@ -28,6 +28,7 @@ public class CocoBraceMatcher implements PairedBraceMatcher {
 
     @Override
     public int getCodeConstructStart(PsiFile psiFile, int openingBraceOffset) {
+        //TODO: return useful value from PairedBraceMatcher.getCodeConstructStart()
         return openingBraceOffset;
     }
 }
