@@ -8,13 +8,20 @@ import com.intellij.psi.PsiLanguageInjectionHost;
 import de.qrdn.coco_idea.psi.CocoInstrumentationCode;
 import org.jetbrains.annotations.NotNull;
 
-public abstract class CocoSemTextImpl
+public class CocoResolverImpl
         extends ASTWrapperPsiElement
         implements CocoInstrumentationCode {
 
-
-    public CocoSemTextImpl(@NotNull ASTNode node) {
+    public CocoResolverImpl(@NotNull ASTNode node) {
         super(node);
+    }
+
+    @NotNull
+    @Override
+    public TextRange getRelevantTextRange() {
+        return TextRange.from(
+                getText().indexOf("(") +1,
+                getTextLength() -1);
     }
 
     @Override
@@ -30,18 +37,12 @@ public abstract class CocoSemTextImpl
 
     @NotNull
     @Override
-    public TextRange getRelevantTextRange() {
-        return TextRange.from(2, getTextLength() -2);
-    }
-
-    @NotNull
-    @Override
     public LiteralTextEscaper<? extends PsiLanguageInjectionHost> createLiteralTextEscaper() {
         return new SimpleLiteralTextEscaper<PsiLanguageInjectionHost>(this) {
             @NotNull
             @Override
             public TextRange getRelevantTextRange() {
-                return CocoSemTextImpl.this.getRelevantTextRange();
+                return CocoResolverImpl.this.getRelevantTextRange();
             }
         };
     }

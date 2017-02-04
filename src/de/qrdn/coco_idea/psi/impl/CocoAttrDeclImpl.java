@@ -37,31 +37,12 @@ public abstract class CocoAttrDeclImpl
     @NotNull
     @Override
     public LiteralTextEscaper<? extends PsiLanguageInjectionHost> createLiteralTextEscaper() {
-        return new LiteralTextEscaper<PsiLanguageInjectionHost>(this) {
+        return new SimpleLiteralTextEscaper<PsiLanguageInjectionHost>(this) {
             @NotNull
             @Override
             public TextRange getRelevantTextRange() {
                 return CocoAttrDeclImpl.this.getRelevantTextRange();
             }
-
-            // these methods copied from LiteralTextEscaper.createSimple()
-
-            @Override
-            public boolean decode(@NotNull TextRange rangeInsideHost, @NotNull StringBuilder outChars) {
-                outChars.append(rangeInsideHost.substring(myHost.getText()));
-                return true;
-            }
-
-            @Override
-            public int getOffsetInHost(int offsetInDecoded, @NotNull TextRange rangeInsideHost) {
-                return rangeInsideHost.getStartOffset() + offsetInDecoded;
-            }
-
-            @Override
-            public boolean isOneLine() {
-                return true;
-            }
-
         };
     }
 }
