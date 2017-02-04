@@ -62,23 +62,51 @@
     mixin("CHARACTERS|TOKENS|PRODUCTIONS")="de.qrdn.coco_idea.psi.impl.CocoFileSectionImpl"
     implements("CHARACTERS|TOKENS|PRODUCTIONS")="de.qrdn.coco_idea.psi.CocoFileSection"
     methods("CHARACTERS|TOKENS|PRODUCTIONS")=[getDeclarations getPresentation]
+    // CocoInstrumentationCode used for instrumentation Language Injection
+    mixin("include_header")="de.qrdn.coco_idea.psi.impl.CocoIncludeHeaderImpl"
+    mixin("global_decls")="de.qrdn.coco_idea.psi.impl.CocoGlobalDeclsImpl"
+    mixin("attribs")="de.qrdn.coco_idea.psi.impl.CocoAttribsImpl"
+    mixin("sem_text")="de.qrdn.coco_idea.psi.impl.CocoSemTextImpl"
+    mixin("attr_decl")="de.qrdn.coco_idea.psi.impl.CocoAttrDeclImpl"
+    mixin("resolver")="de.qrdn.coco_idea.psi.impl.CocoResolverImpl"
+    implements("include_header|global_decls|attribs|sem_text|attr_decl|resolver")="de.qrdn.coco_idea.psi.CocoInstrumentationCode"
 }
 
 //TODO: more pin, recoverWhile attributes to parse broken files
 
 coco_file ::=
-    INSTRUMENTATION_CODE*
+    include_header
     COMPILER_KEYWORD ident_rule
-    INSTRUMENTATION_CODE*
+    global_decls
+    scanner_spec
+    parser_spec
+    end_statement
+  {pin=6}
+
+private scanner_spec ::=
     [ IGNORECASE_KEYWORD ]
     [ CHARACTERS ]
     [ TOKENS ]
-    [ PRAGMAS_KEYWORD token_decl* ]
-    { COMMENTS_KEYWORD FROM_KEYWORD token_expr TO_KEYWORD token_expr NESTED_KEYWORD? }*
-    { IGNORE_KEYWORD set }*
+    pragmas?
+    comment_spec*
+    ignore_spec*
+  {pin=3}
+
+private include_header ::= INSTRUMENTATION_CODE*
+private global_decls ::= INSTRUMENTATION_CODE*
+private parser_spec ::=
     PRODUCTIONS
+private pragmas ::=
+    PRAGMAS_KEYWORD token_decl*
+  {pin=1}
+private comment_spec ::=
+    COMMENTS_KEYWORD FROM_KEYWORD token_expr TO_KEYWORD token_expr NESTED_KEYWORD?
+  {pin=1}
+private ignore_spec ::= IGNORE_KEYWORD set
+  {pin=1}
+private end_statement ::=
     END_KEYWORD ident_rule '.'
-  {pin=11}
+  {pin=1}
 
 CHARACTERS ::= CHARACTERS_KEYWORD set_decl*
   {pin=1}
@@ -92,7 +120,7 @@ set_decl ::= ident_rule '=' set '.'
 set ::= sim_set ('+' sim_set | '-' sim_set)*
 sim_set ::= ident_rule | string | character ['..' character] | ANY_KEYWORD
 token_decl ::= sym [ '=' token_expr '.' ] [ sem_text ]
-attr_decl ::= INSTRUMENTATION_CODE+ // '<.' /* instrumentation_code* */ '.>' | '<' /* instrumentation_code* */ '>'
+private attr_decl ::= INSTRUMENTATION_CODE+ // '<.' /* instrumentation_code* */ '.>' | '<' /* instrumentation_code* */ '>'
 expression ::= term ( '|' term )*
 term ::= ( [resolver] factor factor* )?
 factor ::=
@@ -115,8 +143,8 @@ token_factor ::=
     | '[' token_expr ']'
     | '{' token_expr '}'
 sym ::= ( ident_rule | string | character )
-attribs ::= INSTRUMENTATION_CODE+ // '<' /* instrumentation_code* */ '>' | '<.' /* instrumentation_code* */ '.>'
-sem_text ::= INSTRUMENTATION_CODE+ // '(.' /* instrumentation_code* */ '.)'
+private attribs ::= INSTRUMENTATION_CODE+ // '<' /* instrumentation_code* */ '>' | '<.' /* instrumentation_code* */ '.>'
+private sem_text ::= INSTRUMENTATION_CODE+ // '(.' /* instrumentation_code* */ '.)'
 production ::= ident_rule attr_decl? sem_text? '=' expression '.'
   {pin=4}
 ident_rule ::= ident // just so we have a Psi*Impl class

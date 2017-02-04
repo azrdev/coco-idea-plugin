@@ -1,6 +1,7 @@
 package de.qrdn.coco_idea;
 
 import com.intellij.lexer.Lexer;
+import com.intellij.openapi.editor.colors.EditorColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
@@ -22,7 +23,7 @@ public class CocoSyntaxHighlighter extends SyntaxHighlighterBase {
         fillMap(ATTRIBUTES, CocoTokenTypeSets.PARENTHESES, CocoHighlighterColors.PARENTHESES);
         fillMap(ATTRIBUTES, CocoTokenTypeSets.OPERATORS, CocoHighlighterColors.OPERATORS);
         fillMap(ATTRIBUTES, CocoTokenTypeSets.STRING, CocoHighlighterColors.STRING);
-        fillMap(ATTRIBUTES, CocoTokenTypeSets.INSTRUMENTATION_CODE, CocoHighlighterColors.INSTRUMENTATION_CODE);
+        fillMap(ATTRIBUTES, CocoTokenTypeSets.INSTRUMENTATION_CODE, EditorColors.INJECTED_LANGUAGE_FRAGMENT);
     }
 
     @NotNull

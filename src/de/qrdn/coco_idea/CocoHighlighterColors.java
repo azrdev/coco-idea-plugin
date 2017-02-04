@@ -21,6 +21,4 @@ public interface CocoHighlighterColors {
             createTextAttributesKey("COCO_PARENTHESES", DefaultLanguageHighlighterColors.PARENTHESES);
     TextAttributesKey STRING =
             createTextAttributesKey("COCO_STRING", DefaultLanguageHighlighterColors.STRING);
-    TextAttributesKey INSTRUMENTATION_CODE =
-            createTextAttributesKey("COCO_INSTRUMENTATION_CODE", DefaultLanguageHighlighterColors.MARKUP_TAG);
 }

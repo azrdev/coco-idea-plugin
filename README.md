@@ -6,16 +6,19 @@ to support grammar files (\*.atg) of the [Coco/R](http://ssw.jku.at/Coco/) compi
 Following the [Custom Language Support Tutorial](http://www.jetbrains.org/intellij/sdk/docs/tutorials/custom_language_support_tutorial.html), the lexer is generated from Coco.flex using JFlex, and the parser from Coco.bnf using [Grammar-Kit](https://github.com/JetBrains/Grammar-Kit).
 
 # TODOs
+* language injection
+    - remove delimiters
+    - prefix & suffix as needed
+    - file header
+    - configurable language and/or good guess
+
+- references: see feature branch, maybe <https://github.com/intellij-rust/intellij-rust/tree/master/src/main/kotlin/org/rust/lang/core/resolve/ref> helps
+    - related: find usages, go to symbol
 - customizable syntax highlighting: [Color Settings Page](http://www.jetbrains.org/intellij/sdk/docs/tutorials/custom_language_support/syntax_highlighter_and_color_settings_page.html)
     - syntax highlighting: different colors for keywords, charsets, tokens, productions
 - folding
-- references: see feature branch, maybe <https://github.com/intellij-rust/intellij-rust/tree/master/src/main/kotlin/org/rust/lang/core/resolve/ref> helps
-    - related: find usages, go to symbol
 - PRAGMAs in structure view
 - `$CNF` file header
-- instrumentation language highlighting (it's recognized and assigned, but the IDE only shows plaintext)
-    - `LOG.assertTrue(contentElementType instanceof ILazyParseableElementType, contentElementType);` fails
-- structure view broken with (partially) unparseable file
 
 - code completion, templates, "new file" (template), build system integration, quick fix ...
 
@@ -40,7 +43,7 @@ What may help understanding the tutorial:
     *  Documentation for [Language Injections](https://www.jetbrains.com/help/idea/2016.3/using-language-injections.html). References from embedded fragments are explained [in the tutorial](http://www.jetbrains.org/intellij/sdk/docs/tutorials/custom_language_support/reference_contributor.html#define-a-reference-contributor)
     * <https://intellij-support.jetbrains.com/hc/en-us/community/posts/206483119-Java-code-Injection-in-custom-language-> (CUP)
     * <https://intellij-support.jetbrains.com/hc/en-us/community/posts/206020584-Language-Plugin-for-a-Thymeleaf-like-templating-language> (HTL, but there are other plugins for HTL, too)
-- MultiplePsiFilesPerDocumentFileViewProvider: create several different Psi trees for one file. Have to use a layered Lexer (like [Scala](https://github.com/JetBrains/intellij-scala/blob/32dd1c4/src/org/jetbrains/plugins/scala/lang/lexer/LayeredLexer.java) or *Latte*?
+- MultiplePsiFilesPerDocumentFileViewProvider: create several different Psi trees for one file. Have to use a layered Lexer (like [Scala](https://github.com/JetBrains/intellij-scala/blob/32dd1c4/src/org/jetbrains/plugins/scala/lang/lexer/LayeredLexer.java) or *Latte*)?
     * <https://intellij-support.jetbrains.com/hc/en-us/community/posts/206765105-Tutorial-Custom-templating-language-plugin> (Latte)
     * <https://intellij-support.jetbrains.com/hc/en-us/community/posts/207316255-FindUsages-in-MultiPsiTree-files> (Perl/Pod), [Perl plugin dev thread](https://intellij-support.jetbrains.com/hc/en-us/community/posts/206102159-Perl5-plugin-for-Intellij-IDEA)
     * <https://intellij-support.jetbrains.com/hc/en-us/community/posts/207231009-ERB-like-template-language> (Elixir/ERB)
