@@ -20,12 +20,15 @@ class CocoLexer implements FlexLexer {
 
   /** initial size of the lookahead buffer */
   private static final int ZZ_BUFFERSIZE = 16384;
+  private static final String ZZ_NL = System.getProperty("line.separator");
 
   /** lexical states */
   public static final int YYINITIAL = 0;
   public static final int compiler_decl = 2;
   public static final int global_decl = 4;
   public static final int coco = 6;
+  public static final int pre_resolver = 8;
+  public static final int resolver = 10;
 
   /**
    * ZZ_LEXSTATE[l] is the state in the DFA for the lexical state l
@@ -34,7 +37,7 @@ class CocoLexer implements FlexLexer {
    * l is of the form l = 2*k, k a non negative integer
    */
   private static final int ZZ_LEXSTATE[] = { 
-     0,  0,  1,  1,  2,  2,  3, 3
+     0,  0,  1,  1,  2,  2,  3,  3,  4,  4,  5, 5
   };
 
   /** 
@@ -68,21 +71,21 @@ class CocoLexer implements FlexLexer {
   private static final int [] ZZ_ACTION = zzUnpackAction();
 
   private static final String ZZ_ACTION_PACKED_0 =
-    "\4\0\2\1\1\2\1\3\1\4\1\3\2\1\1\5"+
+    "\6\0\2\1\1\2\1\3\1\4\1\3\2\1\1\5"+
     "\3\2\11\5\1\6\1\7\1\10\1\11\1\12\1\5"+
-    "\1\13\1\14\1\15\1\16\1\17\1\20\1\2\1\0"+
-    "\1\3\3\0\1\21\3\0\1\22\1\0\4\5\1\23"+
-    "\4\5\1\24\1\5\1\25\1\5\3\0\1\26\1\0"+
-    "\1\3\2\0\1\27\1\0\2\22\2\0\6\5\1\30"+
-    "\1\5\1\31\4\5\2\0\1\26\1\0\1\3\3\0"+
-    "\10\5\1\32\1\5\1\33\1\34\3\0\1\3\2\0"+
-    "\11\5\1\0\1\3\2\0\6\5\1\35\1\36\1\37"+
-    "\1\0\1\3\2\0\2\5\1\40\2\5\1\41\1\5"+
-    "\1\42\1\43\2\0\1\44\1\43\3\5\2\0\3\5"+
-    "\1\45\1\46\1\5\1\47\1\50";
+    "\1\13\1\14\1\15\1\16\1\17\1\20\1\2\1\21"+
+    "\1\22\1\23\1\0\1\3\3\0\1\24\3\0\1\25"+
+    "\1\0\4\5\1\26\4\5\1\27\1\5\1\30\1\5"+
+    "\3\0\1\31\1\0\1\3\2\0\1\32\1\0\2\25"+
+    "\1\0\6\5\1\33\1\5\1\34\4\5\2\0\1\31"+
+    "\1\0\1\3\2\0\10\5\1\35\1\5\1\36\1\37"+
+    "\3\0\1\3\2\0\11\5\1\0\1\3\2\0\6\5"+
+    "\1\40\1\41\1\42\1\0\1\3\2\0\2\5\1\43"+
+    "\2\5\1\44\1\5\1\45\1\46\2\0\1\47\1\46"+
+    "\3\5\2\0\3\5\1\50\1\51\1\5\1\52\1\53";
 
   private static int [] zzUnpackAction() {
-    int [] result = new int[167];
+    int [] result = new int[170];
     int offset = 0;
     offset = zzUnpackAction(ZZ_ACTION_PACKED_0, offset, result);
     return result;
@@ -107,30 +110,31 @@ class CocoLexer implements FlexLexer {
   private static final int [] ZZ_ROWMAP = zzUnpackRowMap();
 
   private static final String ZZ_ROWMAP_PACKED_0 =
-    "\0\0\0\60\0\140\0\220\0\300\0\360\0\300\0\u0120"+
-    "\0\u0150\0\u0180\0\u01b0\0\u01e0\0\u0210\0\u0240\0\u0270\0\u02a0"+
+    "\0\0\0\60\0\140\0\220\0\300\0\360\0\u0120\0\u0150"+
+    "\0\u0120\0\u0180\0\u01b0\0\u01e0\0\u0210\0\u0240\0\u0270\0\u02a0"+
     "\0\u02d0\0\u0300\0\u0330\0\u0360\0\u0390\0\u03c0\0\u03f0\0\u0420"+
-    "\0\u0450\0\300\0\u0480\0\300\0\300\0\u0210\0\u04b0\0\u04e0"+
-    "\0\300\0\300\0\300\0\300\0\300\0\u0510\0\u0540\0\u0570"+
-    "\0\u05a0\0\u05d0\0\u0240\0\300\0\u0600\0\u0630\0\u0660\0\u0690"+
-    "\0\u06c0\0\u06f0\0\u0720\0\u0750\0\u0780\0\u0210\0\u07b0\0\u07e0"+
-    "\0\u0810\0\u0840\0\u0870\0\u08a0\0\300\0\u08d0\0\u0900\0\u0930"+
-    "\0\u0960\0\300\0\u0990\0\u09c0\0\u09f0\0\u0a20\0\300\0\u0a50"+
-    "\0\u0a80\0\300\0\u0ab0\0\u0ae0\0\u0b10\0\u0b40\0\u0b70\0\u0ba0"+
-    "\0\u0bd0\0\u0c00\0\u0210\0\u0c30\0\u0210\0\u0c60\0\u0c90\0\u0cc0"+
-    "\0\u0cf0\0\u0d20\0\u0d50\0\u0d80\0\u0db0\0\u0de0\0\u0e10\0\u0e40"+
-    "\0\u0e70\0\u0ea0\0\u0ed0\0\u0f00\0\u0f30\0\u0f60\0\u0f90\0\u0fc0"+
-    "\0\u0ff0\0\u0210\0\u1020\0\u0210\0\u0210\0\u0d80\0\u1050\0\u1080"+
-    "\0\u10b0\0\u10e0\0\u1110\0\u1140\0\u1170\0\u11a0\0\u11d0\0\u1200"+
-    "\0\u1230\0\u1260\0\u1290\0\u12c0\0\u12f0\0\u1320\0\u1350\0\u1380"+
-    "\0\u13b0\0\u13e0\0\u1410\0\u1440\0\u1470\0\u14a0\0\u14d0\0\u0210"+
-    "\0\u0210\0\u1500\0\u1530\0\u1560\0\u1590\0\u15c0\0\u15f0\0\u0210"+
-    "\0\u1620\0\u1650\0\u0210\0\u1680\0\300\0\u0120\0\u16b0\0\u16e0"+
-    "\0\u0210\0\u0210\0\u1710\0\u1740\0\u1770\0\u17a0\0\u17d0\0\u1800"+
-    "\0\u1830\0\u1860\0\300\0\u0210\0\u1890\0\u0210\0\u0210";
+    "\0\u0450\0\u0480\0\u04b0\0\u0120\0\u04e0\0\u0120\0\u0120\0\u0270"+
+    "\0\u0510\0\u0540\0\u0120\0\u0120\0\u0120\0\u0120\0\u0120\0\u0570"+
+    "\0\u0120\0\u0120\0\u0120\0\u05a0\0\u05d0\0\u0600\0\u0630\0\u02a0"+
+    "\0\u0120\0\u0660\0\u0690\0\u06c0\0\u06f0\0\u0720\0\u0750\0\u0780"+
+    "\0\u07b0\0\u07e0\0\u0270\0\u0810\0\u0840\0\u0870\0\u08a0\0\u08d0"+
+    "\0\u0900\0\u0120\0\u0930\0\u0960\0\u0990\0\u09c0\0\u0120\0\u09f0"+
+    "\0\u0a20\0\u0a50\0\u0a80\0\u0120\0\u0ab0\0\u0ae0\0\u0120\0\u0b10"+
+    "\0\u0b40\0\u0b70\0\u0ba0\0\u0bd0\0\u0c00\0\u0c30\0\u0270\0\u0c60"+
+    "\0\u0270\0\u0c90\0\u0cc0\0\u0cf0\0\u0d20\0\u0d50\0\u0d80\0\u0db0"+
+    "\0\u0de0\0\u0e10\0\u0e40\0\u0e70\0\u0ea0\0\u0ed0\0\u0f00\0\u0f30"+
+    "\0\u0f60\0\u0f90\0\u0fc0\0\u0ff0\0\u0270\0\u1020\0\u0270\0\u0270"+
+    "\0\u0db0\0\u1050\0\u1080\0\u10b0\0\u10e0\0\u1110\0\u1140\0\u1170"+
+    "\0\u11a0\0\u11d0\0\u1200\0\u1230\0\u1260\0\u1290\0\u12c0\0\u12f0"+
+    "\0\u1320\0\u1350\0\u1380\0\u13b0\0\u13e0\0\u1410\0\u1440\0\u1470"+
+    "\0\u14a0\0\u14d0\0\u0270\0\u0270\0\u1500\0\u1530\0\u1560\0\u1590"+
+    "\0\u15c0\0\u15f0\0\u0270\0\u1620\0\u1650\0\u0270\0\u1680\0\u0120"+
+    "\0\u0180\0\u16b0\0\u16e0\0\u0270\0\u0270\0\u1710\0\u1740\0\u1770"+
+    "\0\u17a0\0\u17d0\0\u1800\0\u1830\0\u1860\0\u0120\0\u0270\0\u1890"+
+    "\0\u0270\0\u0270";
 
   private static int [] zzUnpackRowMap() {
-    int [] result = new int[167];
+    int [] result = new int[170];
     int offset = 0;
     offset = zzUnpackRowMap(ZZ_ROWMAP_PACKED_0, offset, result);
     return result;
@@ -153,152 +157,152 @@ class CocoLexer implements FlexLexer {
   private static final int [] ZZ_TRANS = zzUnpackTrans();
 
   private static final String ZZ_TRANS_PACKED_0 =
-    "\16\5\1\6\41\5\1\7\1\10\3\7\1\11\2\7"+
-    "\1\10\2\11\2\7\1\11\1\12\21\10\4\7\3\10"+
-    "\6\7\1\10\2\7\16\5\1\13\3\5\1\14\35\5"+
-    "\1\7\1\15\1\7\1\16\1\17\1\11\2\7\1\15"+
-    "\2\11\1\20\1\7\1\11\1\21\2\15\1\22\1\23"+
-    "\1\15\1\24\2\15\1\25\1\26\1\27\1\15\1\30"+
-    "\1\15\1\31\2\15\1\32\1\33\1\34\1\35\1\36"+
-    "\1\15\1\37\1\40\1\41\1\42\1\43\1\44\1\45"+
-    "\1\15\1\46\1\7\77\0\1\47\41\0\2\10\5\0"+
-    "\1\10\5\0\22\10\4\0\3\10\6\0\1\10\7\0"+
-    "\1\11\3\0\2\11\2\0\1\11\43\0\2\10\5\0"+
-    "\1\10\5\0\1\10\1\50\20\10\4\0\3\10\6\0"+
-    "\1\10\34\0\1\51\53\0\1\52\32\0\2\15\5\0"+
-    "\1\15\5\0\22\15\4\0\3\15\6\0\1\15\2\0"+
-    "\3\53\1\54\1\53\1\0\1\53\1\55\5\53\1\0"+
-    "\42\53\4\56\2\0\1\56\1\57\5\56\1\0\42\56"+
-    "\13\0\1\60\1\61\44\0\2\15\5\0\1\15\5\0"+
-    "\1\15\1\62\12\15\1\63\5\15\4\0\3\15\6\0"+
-    "\1\15\3\0\2\15\5\0\1\15\5\0\7\15\1\64"+
-    "\12\15\4\0\3\15\6\0\1\15\3\0\2\15\5\0"+
-    "\1\15\5\0\10\15\1\65\6\15\1\66\2\15\4\0"+
-    "\3\15\6\0\1\15\3\0\2\15\5\0\1\15\5\0"+
-    "\11\15\1\67\10\15\4\0\3\15\6\0\1\15\3\0"+
-    "\2\15\5\0\1\15\5\0\6\15\1\70\13\15\4\0"+
-    "\3\15\6\0\1\15\3\0\2\15\5\0\1\15\5\0"+
-    "\11\15\1\71\10\15\4\0\3\15\6\0\1\15\3\0"+
-    "\2\15\5\0\1\15\5\0\22\15\4\0\1\15\1\72"+
-    "\1\15\6\0\1\15\3\0\2\15\5\0\1\15\5\0"+
-    "\1\15\1\73\20\15\4\0\3\15\6\0\1\15\3\0"+
-    "\2\15\5\0\1\15\5\0\7\15\1\74\12\15\4\0"+
-    "\3\15\6\0\1\15\43\0\1\75\17\0\2\15\5\0"+
-    "\1\15\5\0\6\15\1\76\13\15\4\0\3\15\6\0"+
-    "\1\15\43\0\1\77\16\0\41\100\1\101\15\100\1\102"+
-    "\20\0\1\103\40\0\2\10\5\0\1\10\5\0\2\10"+
-    "\1\104\17\10\4\0\3\10\6\0\1\10\32\0\1\105"+
-    "\56\0\1\106\31\0\4\53\1\0\3\53\1\0\3\53"+
-    "\1\0\42\53\4\0\1\107\54\0\4\110\1\0\3\110"+
-    "\1\0\3\110\1\0\42\110\5\60\1\111\7\60\1\112"+
-    "\42\60\14\113\1\114\43\113\1\0\2\15\5\0\1\15"+
-    "\5\0\2\15\1\115\6\15\1\116\10\15\4\0\3\15"+
-    "\6\0\1\15\3\0\2\15\5\0\1\15\5\0\12\15"+
-    "\1\117\7\15\4\0\3\15\6\0\1\15\3\0\2\15"+
-    "\5\0\1\15\5\0\1\15\1\120\10\15\1\121\7\15"+
-    "\4\0\3\15\6\0\1\15\3\0\2\15\5\0\1\15"+
-    "\5\0\11\15\1\122\10\15\4\0\3\15\6\0\1\15"+
-    "\3\0\2\15\5\0\1\15\5\0\20\15\1\123\1\15"+
-    "\4\0\3\15\6\0\1\15\3\0\2\15\5\0\1\15"+
-    "\5\0\13\15\1\124\6\15\4\0\3\15\6\0\1\15"+
-    "\3\0\2\15\5\0\1\15\5\0\22\15\4\0\1\15"+
-    "\1\125\1\15\6\0\1\15\3\0\2\15\5\0\1\15"+
-    "\5\0\11\15\1\126\10\15\4\0\3\15\6\0\1\15"+
-    "\3\0\2\15\5\0\1\15\5\0\16\15\1\127\3\15"+
-    "\4\0\3\15\6\0\1\15\3\0\2\15\5\0\1\15"+
-    "\5\0\1\15\1\130\20\15\4\0\3\15\6\0\1\15"+
-    "\3\0\2\15\5\0\1\15\5\0\12\15\1\131\7\15"+
-    "\4\0\3\15\6\0\1\15\2\0\41\77\1\132\16\77"+
-    "\57\100\1\102\41\101\1\133\15\101\1\134\21\0\1\135"+
-    "\37\0\2\10\5\0\1\10\5\0\3\10\1\136\16\10"+
-    "\4\0\3\10\6\0\1\10\27\0\1\137\51\0\1\140"+
-    "\42\0\1\110\1\0\1\107\3\0\1\110\64\0\1\112"+
-    "\42\0\14\113\1\141\43\113\13\0\1\112\1\114\44\0"+
-    "\2\15\5\0\1\15\5\0\2\15\1\142\1\143\16\15"+
-    "\4\0\3\15\6\0\1\15\3\0\2\15\5\0\1\15"+
-    "\5\0\15\15\1\144\4\15\4\0\3\15\6\0\1\15"+
-    "\3\0\2\15\5\0\1\15\5\0\7\15\1\145\12\15"+
-    "\4\0\3\15\6\0\1\15\3\0\2\15\5\0\1\15"+
-    "\5\0\20\15\1\146\1\15\4\0\3\15\6\0\1\15"+
-    "\3\0\2\15\5\0\1\15\5\0\10\15\1\147\11\15"+
-    "\4\0\3\15\6\0\1\15\3\0\2\15\5\0\1\15"+
-    "\5\0\1\15\1\150\20\15\4\0\3\15\6\0\1\15"+
-    "\3\0\2\15\5\0\1\15\5\0\15\15\1\151\4\15"+
-    "\4\0\3\15\6\0\1\15\3\0\2\15\5\0\1\15"+
-    "\5\0\1\152\21\15\4\0\3\15\6\0\1\15\3\0"+
-    "\2\15\5\0\1\15\5\0\6\15\1\153\13\15\4\0"+
-    "\3\15\6\0\1\15\3\0\2\15\5\0\1\15\5\0"+
-    "\2\15\1\154\17\15\4\0\3\15\6\0\1\15\3\0"+
-    "\2\15\5\0\1\15\5\0\16\15\1\155\3\15\4\0"+
-    "\3\15\6\0\1\15\2\0\41\77\1\132\6\77\1\102"+
-    "\7\77\41\101\1\133\15\101\1\102\41\156\1\157\16\156"+
-    "\22\0\1\160\36\0\2\10\5\0\1\10\5\0\4\10"+
-    "\1\161\15\10\4\0\3\10\6\0\1\10\32\0\1\162"+
-    "\54\0\1\163\32\0\13\113\1\112\1\141\43\113\1\0"+
-    "\2\15\5\0\1\15\5\0\6\15\1\164\13\15\4\0"+
-    "\3\15\6\0\1\15\3\0\2\15\5\0\1\15\5\0"+
-    "\4\15\1\165\15\15\4\0\3\15\6\0\1\15\3\0"+
-    "\2\15\5\0\1\15\5\0\6\15\1\166\13\15\4\0"+
-    "\3\15\6\0\1\15\3\0\2\15\5\0\1\15\5\0"+
-    "\12\15\1\167\7\15\4\0\3\15\6\0\1\15\3\0"+
-    "\2\15\5\0\1\15\5\0\21\15\1\170\4\0\3\15"+
-    "\6\0\1\15\3\0\2\15\5\0\1\15\5\0\2\15"+
-    "\1\171\17\15\4\0\3\15\6\0\1\15\3\0\2\15"+
-    "\5\0\1\15\5\0\7\15\1\172\12\15\4\0\3\15"+
-    "\6\0\1\15\3\0\2\15\5\0\1\15\5\0\6\15"+
-    "\1\173\13\15\4\0\3\15\6\0\1\15\3\0\2\15"+
-    "\5\0\1\15\5\0\11\15\1\174\10\15\4\0\3\15"+
-    "\6\0\1\15\2\0\41\156\1\157\15\156\1\102\23\0"+
-    "\1\175\35\0\2\10\5\0\1\10\5\0\5\10\1\176"+
-    "\14\10\4\0\3\10\6\0\1\10\20\0\1\177\65\0"+
-    "\1\200\34\0\2\15\5\0\1\15\5\0\11\15\1\201"+
-    "\10\15\4\0\3\15\6\0\1\15\3\0\2\15\5\0"+
-    "\1\15\5\0\5\15\1\202\14\15\4\0\3\15\6\0"+
-    "\1\15\3\0\2\15\5\0\1\15\5\0\22\15\4\0"+
-    "\3\15\6\0\1\203\3\0\2\15\5\0\1\15\5\0"+
-    "\1\204\21\15\4\0\3\15\6\0\1\15\3\0\2\15"+
-    "\5\0\1\15\5\0\1\205\21\15\4\0\3\15\6\0"+
-    "\1\15\3\0\2\15\5\0\1\15\5\0\12\15\1\206"+
-    "\7\15\4\0\3\15\6\0\1\15\3\0\2\15\5\0"+
-    "\1\15\5\0\6\15\1\207\13\15\4\0\3\15\6\0"+
-    "\1\15\3\0\2\15\5\0\1\15\5\0\20\15\1\210"+
-    "\1\15\4\0\3\15\6\0\1\15\3\0\2\15\5\0"+
-    "\1\15\5\0\13\15\1\211\6\15\4\0\3\15\6\0"+
-    "\1\15\26\0\1\212\34\0\2\10\5\0\1\10\5\0"+
-    "\6\10\1\213\13\10\4\0\3\10\6\0\1\10\35\0"+
-    "\1\214\42\0\1\215\42\0\2\15\5\0\1\15\5\0"+
-    "\15\15\1\216\4\15\4\0\3\15\6\0\1\15\3\0"+
-    "\2\15\5\0\1\15\5\0\6\15\1\217\13\15\4\0"+
-    "\3\15\6\0\1\15\3\0\2\15\5\0\1\15\5\0"+
-    "\15\15\1\220\4\15\4\0\3\15\6\0\1\15\3\0"+
-    "\2\15\5\0\1\15\5\0\15\15\1\221\4\15\4\0"+
-    "\3\15\6\0\1\15\3\0\2\15\5\0\1\15\5\0"+
-    "\15\15\1\222\4\15\4\0\3\15\6\0\1\15\3\0"+
-    "\2\15\5\0\1\15\5\0\13\15\1\223\6\15\4\0"+
-    "\3\15\6\0\1\15\3\0\2\15\5\0\1\15\5\0"+
-    "\1\224\21\15\4\0\3\15\6\0\1\15\27\0\1\225"+
-    "\33\0\2\10\5\0\1\10\5\0\7\10\1\226\12\10"+
-    "\4\0\3\10\6\0\1\10\26\0\1\227\63\0\1\230"+
-    "\30\0\2\15\5\0\1\15\5\0\13\15\1\231\6\15"+
-    "\4\0\3\15\6\0\1\15\3\0\2\15\5\0\1\15"+
-    "\5\0\7\15\1\232\12\15\4\0\3\15\6\0\1\15"+
-    "\3\0\2\15\5\0\1\15\5\0\6\15\1\233\13\15"+
-    "\4\0\3\15\6\0\1\15\3\0\2\15\5\0\1\15"+
-    "\5\0\4\15\1\234\15\15\4\0\3\15\6\0\1\15"+
-    "\3\0\2\15\5\0\1\15\5\0\12\15\1\235\7\15"+
-    "\4\0\3\15\6\0\1\15\27\0\1\236\63\0\1\237"+
-    "\27\0\2\15\5\0\1\15\5\0\7\15\1\240\12\15"+
-    "\4\0\3\15\6\0\1\15\3\0\2\15\5\0\1\15"+
-    "\5\0\1\15\1\241\20\15\4\0\3\15\6\0\1\15"+
-    "\3\0\2\15\5\0\1\15\5\0\13\15\1\242\6\15"+
-    "\4\0\3\15\6\0\1\15\33\0\1\243\52\0\1\243"+
-    "\34\0\2\15\5\0\1\15\5\0\13\15\1\244\6\15"+
-    "\4\0\3\15\6\0\1\15\3\0\2\15\5\0\1\15"+
-    "\5\0\11\15\1\245\10\15\4\0\3\15\6\0\1\15"+
-    "\3\0\2\15\5\0\1\15\5\0\6\15\1\246\13\15"+
-    "\4\0\3\15\6\0\1\15\3\0\2\15\5\0\1\15"+
-    "\5\0\13\15\1\247\6\15\4\0\3\15\6\0\1\15"+
-    "\2\0";
+    "\16\7\1\10\41\7\1\11\1\12\3\11\1\13\2\11"+
+    "\1\12\2\13\2\11\1\13\1\14\21\12\4\11\3\12"+
+    "\6\11\1\12\2\11\16\7\1\15\3\7\1\16\35\7"+
+    "\1\11\1\17\1\11\1\20\1\21\1\13\2\11\1\17"+
+    "\2\13\1\22\1\11\1\13\1\23\2\17\1\24\1\25"+
+    "\1\17\1\26\2\17\1\27\1\30\1\31\1\17\1\32"+
+    "\1\17\1\33\2\17\1\34\1\35\1\36\1\37\1\40"+
+    "\1\17\1\41\1\42\1\43\1\44\1\45\1\46\1\47"+
+    "\1\17\1\50\6\11\1\13\3\11\2\13\2\11\1\13"+
+    "\31\11\1\51\10\11\47\7\1\52\1\53\7\7\77\0"+
+    "\1\54\41\0\2\12\5\0\1\12\5\0\22\12\4\0"+
+    "\3\12\6\0\1\12\7\0\1\13\3\0\2\13\2\0"+
+    "\1\13\43\0\2\12\5\0\1\12\5\0\1\12\1\55"+
+    "\20\12\4\0\3\12\6\0\1\12\34\0\1\56\53\0"+
+    "\1\57\32\0\2\17\5\0\1\17\5\0\22\17\4\0"+
+    "\3\17\6\0\1\17\2\0\3\60\1\61\1\60\1\0"+
+    "\1\60\1\62\5\60\1\0\42\60\4\63\2\0\1\63"+
+    "\1\64\5\63\1\0\42\63\13\0\1\65\1\66\44\0"+
+    "\2\17\5\0\1\17\5\0\1\17\1\67\12\17\1\70"+
+    "\5\17\4\0\3\17\6\0\1\17\3\0\2\17\5\0"+
+    "\1\17\5\0\7\17\1\71\12\17\4\0\3\17\6\0"+
+    "\1\17\3\0\2\17\5\0\1\17\5\0\10\17\1\72"+
+    "\6\17\1\73\2\17\4\0\3\17\6\0\1\17\3\0"+
+    "\2\17\5\0\1\17\5\0\11\17\1\74\10\17\4\0"+
+    "\3\17\6\0\1\17\3\0\2\17\5\0\1\17\5\0"+
+    "\6\17\1\75\13\17\4\0\3\17\6\0\1\17\3\0"+
+    "\2\17\5\0\1\17\5\0\11\17\1\76\10\17\4\0"+
+    "\3\17\6\0\1\17\3\0\2\17\5\0\1\17\5\0"+
+    "\22\17\4\0\1\17\1\77\1\17\6\0\1\17\3\0"+
+    "\2\17\5\0\1\17\5\0\1\17\1\100\20\17\4\0"+
+    "\3\17\6\0\1\17\3\0\2\17\5\0\1\17\5\0"+
+    "\7\17\1\101\12\17\4\0\3\17\6\0\1\17\43\0"+
+    "\1\102\17\0\2\17\5\0\1\17\5\0\6\17\1\103"+
+    "\13\17\4\0\3\17\6\0\1\17\43\0\1\104\16\0"+
+    "\41\105\1\106\15\105\1\107\20\0\1\110\40\0\2\12"+
+    "\5\0\1\12\5\0\2\12\1\111\17\12\4\0\3\12"+
+    "\6\0\1\12\32\0\1\112\56\0\1\113\31\0\4\60"+
+    "\1\0\3\60\1\0\3\60\1\0\42\60\4\0\1\114"+
+    "\54\0\4\115\1\0\3\115\1\0\3\115\1\0\42\115"+
+    "\5\65\1\116\7\65\1\117\42\65\14\66\1\120\43\66"+
+    "\1\0\2\17\5\0\1\17\5\0\2\17\1\121\6\17"+
+    "\1\122\10\17\4\0\3\17\6\0\1\17\3\0\2\17"+
+    "\5\0\1\17\5\0\12\17\1\123\7\17\4\0\3\17"+
+    "\6\0\1\17\3\0\2\17\5\0\1\17\5\0\1\17"+
+    "\1\124\10\17\1\125\7\17\4\0\3\17\6\0\1\17"+
+    "\3\0\2\17\5\0\1\17\5\0\11\17\1\126\10\17"+
+    "\4\0\3\17\6\0\1\17\3\0\2\17\5\0\1\17"+
+    "\5\0\20\17\1\127\1\17\4\0\3\17\6\0\1\17"+
+    "\3\0\2\17\5\0\1\17\5\0\13\17\1\130\6\17"+
+    "\4\0\3\17\6\0\1\17\3\0\2\17\5\0\1\17"+
+    "\5\0\22\17\4\0\1\17\1\131\1\17\6\0\1\17"+
+    "\3\0\2\17\5\0\1\17\5\0\11\17\1\132\10\17"+
+    "\4\0\3\17\6\0\1\17\3\0\2\17\5\0\1\17"+
+    "\5\0\16\17\1\133\3\17\4\0\3\17\6\0\1\17"+
+    "\3\0\2\17\5\0\1\17\5\0\1\17\1\134\20\17"+
+    "\4\0\3\17\6\0\1\17\3\0\2\17\5\0\1\17"+
+    "\5\0\12\17\1\135\7\17\4\0\3\17\6\0\1\17"+
+    "\2\0\41\104\1\136\16\104\57\105\1\107\41\106\1\137"+
+    "\15\106\1\140\21\0\1\141\37\0\2\12\5\0\1\12"+
+    "\5\0\3\12\1\142\16\12\4\0\3\12\6\0\1\12"+
+    "\27\0\1\143\51\0\1\144\42\0\1\115\1\0\1\114"+
+    "\3\0\1\115\64\0\1\117\42\0\13\66\1\117\1\120"+
+    "\43\66\1\0\2\17\5\0\1\17\5\0\2\17\1\145"+
+    "\1\146\16\17\4\0\3\17\6\0\1\17\3\0\2\17"+
+    "\5\0\1\17\5\0\15\17\1\147\4\17\4\0\3\17"+
+    "\6\0\1\17\3\0\2\17\5\0\1\17\5\0\7\17"+
+    "\1\150\12\17\4\0\3\17\6\0\1\17\3\0\2\17"+
+    "\5\0\1\17\5\0\20\17\1\151\1\17\4\0\3\17"+
+    "\6\0\1\17\3\0\2\17\5\0\1\17\5\0\10\17"+
+    "\1\152\11\17\4\0\3\17\6\0\1\17\3\0\2\17"+
+    "\5\0\1\17\5\0\1\17\1\153\20\17\4\0\3\17"+
+    "\6\0\1\17\3\0\2\17\5\0\1\17\5\0\15\17"+
+    "\1\154\4\17\4\0\3\17\6\0\1\17\3\0\2\17"+
+    "\5\0\1\17\5\0\1\155\21\17\4\0\3\17\6\0"+
+    "\1\17\3\0\2\17\5\0\1\17\5\0\6\17\1\156"+
+    "\13\17\4\0\3\17\6\0\1\17\3\0\2\17\5\0"+
+    "\1\17\5\0\2\17\1\157\17\17\4\0\3\17\6\0"+
+    "\1\17\3\0\2\17\5\0\1\17\5\0\16\17\1\160"+
+    "\3\17\4\0\3\17\6\0\1\17\2\0\41\104\1\136"+
+    "\6\104\1\107\7\104\41\106\1\137\15\106\1\107\41\161"+
+    "\1\162\16\161\22\0\1\163\36\0\2\12\5\0\1\12"+
+    "\5\0\4\12\1\164\15\12\4\0\3\12\6\0\1\12"+
+    "\32\0\1\165\54\0\1\166\33\0\2\17\5\0\1\17"+
+    "\5\0\6\17\1\167\13\17\4\0\3\17\6\0\1\17"+
+    "\3\0\2\17\5\0\1\17\5\0\4\17\1\170\15\17"+
+    "\4\0\3\17\6\0\1\17\3\0\2\17\5\0\1\17"+
+    "\5\0\6\17\1\171\13\17\4\0\3\17\6\0\1\17"+
+    "\3\0\2\17\5\0\1\17\5\0\12\17\1\172\7\17"+
+    "\4\0\3\17\6\0\1\17\3\0\2\17\5\0\1\17"+
+    "\5\0\21\17\1\173\4\0\3\17\6\0\1\17\3\0"+
+    "\2\17\5\0\1\17\5\0\2\17\1\174\17\17\4\0"+
+    "\3\17\6\0\1\17\3\0\2\17\5\0\1\17\5\0"+
+    "\7\17\1\175\12\17\4\0\3\17\6\0\1\17\3\0"+
+    "\2\17\5\0\1\17\5\0\6\17\1\176\13\17\4\0"+
+    "\3\17\6\0\1\17\3\0\2\17\5\0\1\17\5\0"+
+    "\11\17\1\177\10\17\4\0\3\17\6\0\1\17\2\0"+
+    "\41\161\1\162\15\161\1\107\23\0\1\200\35\0\2\12"+
+    "\5\0\1\12\5\0\5\12\1\201\14\12\4\0\3\12"+
+    "\6\0\1\12\20\0\1\202\65\0\1\203\34\0\2\17"+
+    "\5\0\1\17\5\0\11\17\1\204\10\17\4\0\3\17"+
+    "\6\0\1\17\3\0\2\17\5\0\1\17\5\0\5\17"+
+    "\1\205\14\17\4\0\3\17\6\0\1\17\3\0\2\17"+
+    "\5\0\1\17\5\0\22\17\4\0\3\17\6\0\1\206"+
+    "\3\0\2\17\5\0\1\17\5\0\1\207\21\17\4\0"+
+    "\3\17\6\0\1\17\3\0\2\17\5\0\1\17\5\0"+
+    "\1\210\21\17\4\0\3\17\6\0\1\17\3\0\2\17"+
+    "\5\0\1\17\5\0\12\17\1\211\7\17\4\0\3\17"+
+    "\6\0\1\17\3\0\2\17\5\0\1\17\5\0\6\17"+
+    "\1\212\13\17\4\0\3\17\6\0\1\17\3\0\2\17"+
+    "\5\0\1\17\5\0\20\17\1\213\1\17\4\0\3\17"+
+    "\6\0\1\17\3\0\2\17\5\0\1\17\5\0\13\17"+
+    "\1\214\6\17\4\0\3\17\6\0\1\17\26\0\1\215"+
+    "\34\0\2\12\5\0\1\12\5\0\6\12\1\216\13\12"+
+    "\4\0\3\12\6\0\1\12\35\0\1\217\42\0\1\220"+
+    "\42\0\2\17\5\0\1\17\5\0\15\17\1\221\4\17"+
+    "\4\0\3\17\6\0\1\17\3\0\2\17\5\0\1\17"+
+    "\5\0\6\17\1\222\13\17\4\0\3\17\6\0\1\17"+
+    "\3\0\2\17\5\0\1\17\5\0\15\17\1\223\4\17"+
+    "\4\0\3\17\6\0\1\17\3\0\2\17\5\0\1\17"+
+    "\5\0\15\17\1\224\4\17\4\0\3\17\6\0\1\17"+
+    "\3\0\2\17\5\0\1\17\5\0\15\17\1\225\4\17"+
+    "\4\0\3\17\6\0\1\17\3\0\2\17\5\0\1\17"+
+    "\5\0\13\17\1\226\6\17\4\0\3\17\6\0\1\17"+
+    "\3\0\2\17\5\0\1\17\5\0\1\227\21\17\4\0"+
+    "\3\17\6\0\1\17\27\0\1\230\33\0\2\12\5\0"+
+    "\1\12\5\0\7\12\1\231\12\12\4\0\3\12\6\0"+
+    "\1\12\26\0\1\232\63\0\1\233\30\0\2\17\5\0"+
+    "\1\17\5\0\13\17\1\234\6\17\4\0\3\17\6\0"+
+    "\1\17\3\0\2\17\5\0\1\17\5\0\7\17\1\235"+
+    "\12\17\4\0\3\17\6\0\1\17\3\0\2\17\5\0"+
+    "\1\17\5\0\6\17\1\236\13\17\4\0\3\17\6\0"+
+    "\1\17\3\0\2\17\5\0\1\17\5\0\4\17\1\237"+
+    "\15\17\4\0\3\17\6\0\1\17\3\0\2\17\5\0"+
+    "\1\17\5\0\12\17\1\240\7\17\4\0\3\17\6\0"+
+    "\1\17\27\0\1\241\63\0\1\242\27\0\2\17\5\0"+
+    "\1\17\5\0\7\17\1\243\12\17\4\0\3\17\6\0"+
+    "\1\17\3\0\2\17\5\0\1\17\5\0\1\17\1\244"+
+    "\20\17\4\0\3\17\6\0\1\17\3\0\2\17\5\0"+
+    "\1\17\5\0\13\17\1\245\6\17\4\0\3\17\6\0"+
+    "\1\17\33\0\1\246\52\0\1\246\34\0\2\17\5\0"+
+    "\1\17\5\0\13\17\1\247\6\17\4\0\3\17\6\0"+
+    "\1\17\3\0\2\17\5\0\1\17\5\0\11\17\1\250"+
+    "\10\17\4\0\3\17\6\0\1\17\3\0\2\17\5\0"+
+    "\1\17\5\0\6\17\1\251\13\17\4\0\3\17\6\0"+
+    "\1\17\3\0\2\17\5\0\1\17\5\0\13\17\1\252"+
+    "\6\17\4\0\3\17\6\0\1\17\2\0";
 
   private static int [] zzUnpackTrans() {
     int [] result = new int[6336];
@@ -339,17 +343,17 @@ class CocoLexer implements FlexLexer {
   private static final int [] ZZ_ATTRIBUTE = zzUnpackAttribute();
 
   private static final String ZZ_ATTRIBUTE_PACKED_0 =
-    "\4\0\1\11\1\1\1\11\22\1\1\11\1\1\2\11"+
-    "\3\1\5\11\1\1\1\0\1\1\3\0\1\11\3\0"+
-    "\1\1\1\0\13\1\1\11\1\1\3\0\1\11\1\0"+
-    "\1\1\2\0\1\11\1\0\1\1\1\11\2\0\15\1"+
-    "\2\0\1\1\1\0\1\1\3\0\14\1\3\0\1\1"+
-    "\2\0\11\1\1\0\1\1\2\0\11\1\1\0\1\1"+
-    "\2\0\7\1\1\11\1\1\2\0\5\1\2\0\3\1"+
-    "\1\11\4\1";
+    "\6\0\1\11\1\1\1\11\22\1\1\11\1\1\2\11"+
+    "\3\1\5\11\1\1\3\11\1\0\1\1\3\0\1\11"+
+    "\3\0\1\1\1\0\13\1\1\11\1\1\3\0\1\11"+
+    "\1\0\1\1\2\0\1\11\1\0\1\1\1\11\1\0"+
+    "\15\1\2\0\1\1\1\0\1\1\2\0\14\1\3\0"+
+    "\1\1\2\0\11\1\1\0\1\1\2\0\11\1\1\0"+
+    "\1\1\2\0\7\1\1\11\1\1\2\0\5\1\2\0"+
+    "\3\1\1\11\4\1";
 
   private static int [] zzUnpackAttribute() {
-    int [] result = new int[167];
+    int [] result = new int[170];
     int offset = 0;
     offset = zzUnpackAttribute(ZZ_ATTRIBUTE_PACKED_0, offset, result);
     return result;
@@ -404,6 +408,10 @@ class CocoLexer implements FlexLexer {
   /** denotes if the user-EOF-code has already been executed */
   private boolean zzEOFDone;
 
+  /* user code: */
+/** in state "resolver", count the level of nested braces that we're in */
+int resolver_brace_depth = 0;
+
 
   /**
    * Creates a new scanner
@@ -435,6 +443,23 @@ class CocoLexer implements FlexLexer {
       do map[j++] = value; while (--count > 0);
     }
     return map;
+  }
+
+  private static String zzToPrintable(CharSequence str) {
+    StringBuilder builder = new StringBuilder();
+    for (int n = 0 ; n < str.length() ; ) {
+      int ch = Character.codePointAt(str, n);
+      int charCount = Character.charCount(ch);
+      n += charCount;
+      if (ch > 31 && ch < 127) {
+        builder.append((char)ch);
+      } else if (charCount == 1) {
+        builder.append(String.format("\\u%04X", ch));
+      } else {
+        builder.append(String.format("\\U%06X", ch));
+      }
+    }
+    return builder.toString();
   }
 
   public final int getTokenStart() {
@@ -650,168 +675,320 @@ class CocoLexer implements FlexLexer {
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [54] {  }");
             { 
             }
-          case 41: break;
+          case 44: break;
           case 2: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [141] { return TokenType.BAD_CHARACTER; }");
             { return TokenType.BAD_CHARACTER;
             }
-          case 42: break;
+          case 45: break;
           case 3: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [59] { yybegin(global_decl); return CocoTypes.IDENT; }");
             { yybegin(global_decl); return CocoTypes.IDENT;
             }
-          case 43: break;
+          case 46: break;
           case 4: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [60] { return TokenType.WHITE_SPACE; }");
             { return TokenType.WHITE_SPACE;
             }
-          case 44: break;
+          case 47: break;
           case 5: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [118] { return CocoTypes.IDENT; }");
             { return CocoTypes.IDENT;
             }
-          case 45: break;
+          case 48: break;
           case 6: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [96] { return CocoTypes.EQUALS; }");
             { return CocoTypes.EQUALS;
             }
-          case 46: break;
+          case 49: break;
           case 7: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [97] { return CocoTypes.DOT; }");
             { return CocoTypes.DOT;
             }
-          case 47: break;
+          case 50: break;
           case 8: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [98] { return CocoTypes.PLUS; }");
             { return CocoTypes.PLUS;
             }
-          case 48: break;
+          case 51: break;
           case 9: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [99] { return CocoTypes.MINUS; }");
             { return CocoTypes.MINUS;
             }
-          case 49: break;
+          case 52: break;
           case 10: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [101] { return CocoTypes.OR; }");
             { return CocoTypes.OR;
             }
-          case 50: break;
+          case 53: break;
           case 11: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [104] { return CocoTypes.LPAREN; }");
             { return CocoTypes.LPAREN;
             }
-          case 51: break;
+          case 54: break;
           case 12: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [105] { return CocoTypes.RPAREN; }");
             { return CocoTypes.RPAREN;
             }
-          case 52: break;
+          case 55: break;
           case 13: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [106] { return CocoTypes.LSPAREN; }");
             { return CocoTypes.LSPAREN;
             }
-          case 53: break;
+          case 56: break;
           case 14: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [107] { return CocoTypes.RSPAREN; }");
             { return CocoTypes.RSPAREN;
             }
-          case 54: break;
+          case 57: break;
           case 15: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [108] { return CocoTypes.LAPAREN; }");
             { return CocoTypes.LAPAREN;
             }
-          case 55: break;
+          case 58: break;
           case 16: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [109] { return CocoTypes.RAPAREN; }");
             { return CocoTypes.RAPAREN;
             }
-          case 56: break;
-          case 17: 
-            { return CocoTypes.STRING;
-            }
-          case 57: break;
-          case 18: 
-            { return CocoTypes.COMMENT;
-            }
-          case 58: break;
-          case 19: 
-            { return CocoTypes.IF_KEYWORD;
-            }
           case 59: break;
-          case 20: 
-            { return CocoTypes.TO_KEYWORD;
+          case 17: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [128] { yybegin(resolver); }");
+            { yybegin(resolver);
             }
           case 60: break;
-          case 21: 
-            { return CocoTypes.DOTDOT;
+          case 18: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [132] { ++resolver_brace_depth; }");
+            { ++resolver_brace_depth;
             }
           case 61: break;
-          case 22: 
-            { return CocoTypes.INSTRUMENTATION_CODE;
+          case 19: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [133] { if(resolver_brace_depth <= 0) { yybegin(coco); return CocoTypes.RESOLVER; }"+ZZ_NL+"                          --resolver_brace_depth; }");
+            { if(resolver_brace_depth <= 0) { yybegin(coco); return CocoTypes.RESOLVER; }
+                          --resolver_brace_depth;
             }
           case 62: break;
-          case 23: 
-            { return CocoTypes.CHARACTER;
+          case 20: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [76] { return CocoTypes.STRING; }");
+            { return CocoTypes.STRING;
             }
           case 63: break;
-          case 24: 
-            { return CocoTypes.END_KEYWORD;
+          case 21: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [81] { return CocoTypes.COMMENT; }");
+            { return CocoTypes.COMMENT;
             }
           case 64: break;
-          case 25: 
-            { return CocoTypes.ANY_KEYWORD;
+          case 22: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [111] { yybegin(pre_resolver); resolver_brace_depth = 0; }");
+            { yybegin(pre_resolver); resolver_brace_depth = 0;
             }
           case 65: break;
-          case 26: 
-            { return CocoTypes.SYNC_KEYWORD;
+          case 23: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [91] { return CocoTypes.TO_KEYWORD; }");
+            { return CocoTypes.TO_KEYWORD;
             }
           case 66: break;
-          case 27: 
-            { return CocoTypes.FROM_KEYWORD;
+          case 24: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [100] { return CocoTypes.DOTDOT; }");
+            { return CocoTypes.DOTDOT;
             }
           case 67: break;
-          case 28: 
-            { return CocoTypes.WEAK_KEYWORD;
+          case 25: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [121] { return CocoTypes.INSTRUMENTATION_CODE; }");
+            { return CocoTypes.INSTRUMENTATION_CODE;
             }
           case 68: break;
-          case 29: 
-            { return CocoTypes.IGNORE_KEYWORD;
+          case 26: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [77] { return CocoTypes.CHARACTER; }");
+            { return CocoTypes.CHARACTER;
             }
           case 69: break;
-          case 30: 
-            { return CocoTypes.NESTED_KEYWORD;
+          case 27: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [95] { return CocoTypes.END_KEYWORD; }");
+            { return CocoTypes.END_KEYWORD;
             }
           case 70: break;
-          case 31: 
-            { return CocoTypes.TOKENS_KEYWORD;
+          case 28: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [102] { return CocoTypes.ANY_KEYWORD; }");
+            { return CocoTypes.ANY_KEYWORD;
             }
           case 71: break;
-          case 32: 
-            { return CocoTypes.CONTEXT_KEYWORD;
+          case 29: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [110] { return CocoTypes.SYNC_KEYWORD; }");
+            { return CocoTypes.SYNC_KEYWORD;
             }
           case 72: break;
-          case 33: 
-            { return CocoTypes.PRAGMAS_KEYWORD;
+          case 30: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [90] { return CocoTypes.FROM_KEYWORD; }");
+            { return CocoTypes.FROM_KEYWORD;
             }
           case 73: break;
-          case 34: 
-            { yypushback(yylength()); yybegin(compiler_decl); return CocoTypes.INSTRUMENTATION_CODE;
+          case 31: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [103] { return CocoTypes.WEAK_KEYWORD; }");
+            { return CocoTypes.WEAK_KEYWORD;
             }
           case 74: break;
-          case 35: 
-            { return CocoTypes.COMPILER_KEYWORD;
+          case 32: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [93] { return CocoTypes.IGNORE_KEYWORD; }");
+            { return CocoTypes.IGNORE_KEYWORD;
             }
           case 75: break;
-          case 36: 
-            { return CocoTypes.COMMENTS_KEYWORD;
+          case 33: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [92] { return CocoTypes.NESTED_KEYWORD; }");
+            { return CocoTypes.NESTED_KEYWORD;
             }
           case 76: break;
-          case 37: 
-            { yypushback(yylength()); yybegin(coco); return CocoTypes.INSTRUMENTATION_CODE;
+          case 34: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [87] { return CocoTypes.TOKENS_KEYWORD; }");
+            { return CocoTypes.TOKENS_KEYWORD;
             }
           case 77: break;
-          case 38: 
-            { return CocoTypes.CHARACTERS_KEYWORD;
+          case 35: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [112] { return CocoTypes.CONTEXT_KEYWORD; }");
+            { return CocoTypes.CONTEXT_KEYWORD;
             }
           case 78: break;
-          case 39: 
-            { return CocoTypes.IGNORECASE_KEYWORD;
+          case 36: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [88] { return CocoTypes.PRAGMAS_KEYWORD; }");
+            { return CocoTypes.PRAGMAS_KEYWORD;
             }
           case 79: break;
-          case 40: 
-            { return CocoTypes.PRODUCTIONS_KEYWORD;
+          case 37: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [53] { yypushback(yylength()); yybegin(compiler_decl); return CocoTypes.INSTRUMENTATION_CODE; }");
+            { yypushback(yylength()); yybegin(compiler_decl); return CocoTypes.INSTRUMENTATION_CODE;
             }
           case 80: break;
+          case 38: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [58] { return CocoTypes.COMPILER_KEYWORD; }");
+            { return CocoTypes.COMPILER_KEYWORD;
+            }
+          case 81: break;
+          case 39: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [89] { return CocoTypes.COMMENTS_KEYWORD; }");
+            { return CocoTypes.COMMENTS_KEYWORD;
+            }
+          case 82: break;
+          case 40: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [67] { yypushback(yylength()); yybegin(coco); return CocoTypes.INSTRUMENTATION_CODE; }");
+            { yypushback(yylength()); yybegin(coco); return CocoTypes.INSTRUMENTATION_CODE;
+            }
+          case 83: break;
+          case 41: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [86] { return CocoTypes.CHARACTERS_KEYWORD; }");
+            { return CocoTypes.CHARACTERS_KEYWORD;
+            }
+          case 84: break;
+          case 42: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [85] { return CocoTypes.IGNORECASE_KEYWORD; }");
+            { return CocoTypes.IGNORECASE_KEYWORD;
+            }
+          case 85: break;
+          case 43: 
+            System.out.println("match: --"+zzToPrintable(yytext())+"--");
+            System.out.println("action [94] { return CocoTypes.PRODUCTIONS_KEYWORD; }");
+            { return CocoTypes.PRODUCTIONS_KEYWORD;
+            }
+          case 86: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }
+      }
+    }
+  }
+
+  /**
+   * Runs the scanner on input files.
+   *
+   * This main method is the debugging routine for the scanner.
+   * It prints debugging information about each returned token to
+   * System.out until the end of file is reached, or an error occured.
+   *
+   * @param argv   the command line, contains the filenames to run
+   *               the scanner on.
+   */
+  public static void main(String argv[]) {
+    if (argv.length == 0) {
+      System.out.println("Usage : java CocoLexer [ --encoding <name> ] <inputfile(s)>");
+    }
+    else {
+      int firstFilePos = 0;
+      String encodingName = "UTF-8";
+      if (argv[0].equals("--encoding")) {
+        firstFilePos = 2;
+        encodingName = argv[1];
+        try {
+          java.nio.charset.Charset.forName(encodingName); // Side-effect: is encodingName valid? 
+        } catch (Exception e) {
+          System.out.println("Invalid encoding '" + encodingName + "'");
+          return;
+        }
+      }
+      for (int i = firstFilePos; i < argv.length; i++) {
+        CocoLexer scanner = null;
+        try {
+          java.io.FileInputStream stream = new java.io.FileInputStream(argv[i]);
+          java.io.Reader reader = new java.io.InputStreamReader(stream, encodingName);
+          scanner = new CocoLexer(reader);
+          do {
+            System.out.println(scanner.advance());
+          } while (!scanner.zzAtEOF);
+
+        }
+        catch (java.io.FileNotFoundException e) {
+          System.out.println("File not found : \""+argv[i]+"\"");
+        }
+        catch (java.io.IOException e) {
+          System.out.println("IO error scanning file \""+argv[i]+"\"");
+          System.out.println(e);
+        }
+        catch (Exception e) {
+          System.out.println("Unexpected exception:");
+          e.printStackTrace();
+        }
       }
     }
   }

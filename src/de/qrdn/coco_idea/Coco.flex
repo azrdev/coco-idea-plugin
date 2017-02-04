@@ -12,15 +12,8 @@ import com.intellij.psi.TokenType;
 %unicode
 %function advance
 %type IElementType
-/* TODO: trying to test JFlex standalone broken: only prints "null" for EOF token. Should be fixed, see <https://github.com/JetBrains/Grammar-Kit/issues/149>
 %debug
-%{
 
-  private static String zzToPrintable(CharSequence cs) {
-    return zzToPrintable(cs.toString());
-  }
-%}
-// */
 
 letter = [a-z|A-Z|_]
 digit = [0-9]
@@ -39,11 +32,16 @@ char = \' ( {char_ch} | \\ {printable} {hex}* ) \'
 /* comments */
 Comment = {TraditionalComment}|{EndOfLineComment}
 //TODO: nested TraditionalComment
-TraditionalComment   = "/*"[^*]~"*/"|"/*""*"+"/"
+TraditionalComment   = "/*" ~"*/"
 // Comment can be the last line of the file, without line terminator.
 EndOfLineComment     = "//"[^\r\n]*(\n|\r|\r\n)?
 
-%s compiler_decl global_decl coco
+%s compiler_decl global_decl coco pre_resolver resolver
+
+%{
+/** in state "resolver", count the level of nested braces that we're in */
+int resolver_brace_depth = 0;
+%}
 
 %%
 
@@ -110,7 +108,7 @@ EndOfLineComment     = "//"[^\r\n]*(\n|\r|\r\n)?
     "{"                 { return CocoTypes.LAPAREN; }
     "}"                 { return CocoTypes.RAPAREN; }
     "SYNC"              { return CocoTypes.SYNC_KEYWORD; }
-    "IF"                { return CocoTypes.IF_KEYWORD; }
+    "IF"                { yybegin(pre_resolver); resolver_brace_depth = 0; }
     "CONTEXT"           { return CocoTypes.CONTEXT_KEYWORD; }
     // actually, these are already found in <global_decl>, but then pushed back
     "IGNORECASE"        { return CocoTypes.IGNORECASE_KEYWORD; }
@@ -123,6 +121,20 @@ EndOfLineComment     = "//"[^\r\n]*(\n|\r|\r\n)?
     "<" ~">"            { return CocoTypes.INSTRUMENTATION_CODE; }
     "<." ~".>"          { return CocoTypes.INSTRUMENTATION_CODE; }
     "(." ~".)"          { return CocoTypes.INSTRUMENTATION_CODE; }
+}
+
+<pre_resolver> {
+    {white_space}       { return TokenType.WHITE_SPACE; }
+    "("                 { yybegin(resolver); }
+}
+
+<resolver> {
+    "("                 { ++resolver_brace_depth; }
+    ")"                 {
+                          if(resolver_brace_depth <= 0) { yybegin(coco); return CocoTypes.RESOLVER; }
+                          --resolver_brace_depth;
+                        }
+    [^]                 { }
 }
 
 // error fallback

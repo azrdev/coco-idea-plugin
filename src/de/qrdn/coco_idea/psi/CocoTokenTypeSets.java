@@ -21,7 +21,6 @@ public interface CocoTokenTypeSets {
             CocoTypes.ANY_KEYWORD,
             CocoTypes.WEAK_KEYWORD,
             CocoTypes.SYNC_KEYWORD,
-            CocoTypes.IF_KEYWORD,
             CocoTypes.CONTEXT_KEYWORD);
 
     TokenSet IDENTIFIER = TokenSet.create(CocoTypes.IDENT);
