@@ -1,5 +1,6 @@
 package de.qrdn.coco_idea;
 
+import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiReferenceBase;
@@ -33,5 +34,10 @@ public abstract class CocoReference extends PsiReferenceBase<CocoIdentRule> {
     @Override
     public Object[] getVariants() {
         return ArrayUtil.EMPTY_OBJECT_ARRAY;
+    }
+
+    @Override
+    public TextRange getRangeInElement() {
+        return TextRange.from(0, getElement().getTextLength());
     }
 }

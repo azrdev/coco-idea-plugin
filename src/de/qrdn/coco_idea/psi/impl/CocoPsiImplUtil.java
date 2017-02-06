@@ -45,7 +45,6 @@ public class CocoPsiImplUtil {
         return null;
     }
 
-    //TODO: use getPresentation
     public static ItemPresentation getPresentation(final CocoNamedElement element) {
         return new ItemPresentation() {
             @Nullable
@@ -88,13 +87,13 @@ public class CocoPsiImplUtil {
     }
 
     public static PsiReference getReference(@NotNull final CocoIdentRule element) {
-        /* find out if identifier is used in character set declarations or token declarations (thus denoting character sets),
-         * or in productions (thus denoting )
+        /* find out if identifier is used in character set declaration or token declaration (thus denoting character sets),
+         * or in production (thus denoting tokens or productions)
          */
         ASTNode section;
         for(section = element.getNode(); section != null; section = section.getTreeParent()) {
             final PsiElement sectionPsi = section.getPsi();
-            if(sectionPsi instanceof CocoProductions) {
+            if(sectionPsi instanceof CocoProduction) {
                 return new CocoReference(element) {
                     @Nullable
                     @Override
@@ -102,8 +101,8 @@ public class CocoPsiImplUtil {
                         return containingFile.getTokenOrProduction(referenceName);
                     }
                 };
-            } else if(sectionPsi instanceof CocoTokens ||
-                    sectionPsi instanceof CocoCharacters) {
+            } else if(sectionPsi instanceof CocoTokenDecl ||
+                    sectionPsi instanceof CocoSetDecl) {
                 return new CocoReference(element) {
                     @Nullable
                     @Override

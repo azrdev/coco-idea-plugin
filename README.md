@@ -12,7 +12,7 @@ Following the [Custom Language Support Tutorial](http://www.jetbrains.org/intell
     - file header
     - configurable language and/or good guess
 
-- references: see feature branch, maybe <https://github.com/intellij-rust/intellij-rust/tree/master/src/main/kotlin/org/rust/lang/core/resolve/ref> helps
+- references: something misses for highlighting of all uses
     - related: find usages, go to symbol
 - customizable syntax highlighting: [Color Settings Page](http://www.jetbrains.org/intellij/sdk/docs/tutorials/custom_language_support/syntax_highlighter_and_color_settings_page.html)
     - syntax highlighting: different colors for keywords, charsets, tokens, productions
@@ -27,6 +27,7 @@ Following the [Custom Language Support Tutorial](http://www.jetbrains.org/intell
 - for references: methods from .bnf are delegated to psiImplUtilClass, *if signature fits*
 - bnf: methods(nonterminals)=[] are not resolved correctly in "attributes" header
 - bug in `SimpleStructureViewModel.isAlwaysLeaf`: `element instanceof SimpleFile` is always false, it should be `treeElement.psiElement instanceof ...`
+- `PsiReference.resolve()` is only called when you return a valid value from `.rangeInsideHost()` (which `PsiReferenceBase` does *not* do)
 
 What may help understanding the tutorial:
 - Rust [JFlex Lexer](https://github.com/intellij-rust/intellij-rust/blob/master/src/main/grammars/RustLexer.flex) and [Grammar-Kit Parser](https://github.com/intellij-rust/intellij-rust/blob/master/src/main/grammars/RustParser.bnf)

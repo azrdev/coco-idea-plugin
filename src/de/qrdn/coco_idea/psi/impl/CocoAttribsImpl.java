@@ -44,9 +44,8 @@ public abstract class CocoAttribsImpl
     @NotNull
     @Override
     public TextRange getRelevantTextRange() {
-        if(instrumentationTokenType == CocoTypes.INSTRUMENTATION_CODE_ANGLE)
-            return TextRange.from(1, getTextLength() -1);
-        return TextRange.from(2, getTextLength() -2);
+        final int delimiter_length = (instrumentationTokenType == CocoTypes.INSTRUMENTATION_CODE_ANGLE)? 1 : 2;
+        return getTextRange().cutOut(TextRange.create(delimiter_length, getTextLength() -delimiter_length));
     }
 
     @NotNull

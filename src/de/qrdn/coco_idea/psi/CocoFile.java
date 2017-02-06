@@ -81,7 +81,7 @@ public class CocoFile extends PsiFileBase {
         if(productions.getValue().containsKey(referenceName)) {
             return productions.getValue().get(referenceName);
         } else if(tokens.getValue().containsKey(referenceName)) {
-            return productions.getValue().get(referenceName);
+            return tokens.getValue().get(referenceName);
         }
         return null;
     }

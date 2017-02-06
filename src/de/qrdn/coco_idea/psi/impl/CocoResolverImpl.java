@@ -19,9 +19,11 @@ public class CocoResolverImpl
     @NotNull
     @Override
     public TextRange getRelevantTextRange() {
-        return TextRange.from(
-                getText().indexOf("(") +1,
-                getTextLength() -1);
+        //FIXME: weird errors like  "rangeInsideHost must lie within host text range. rangeInsideHost:(343930,343964); host textRange:(343927,343965)"
+        final int bracePosition = getText().indexOf("(");
+        return getTextRange().cutOut(TextRange.create(
+                bracePosition +1,
+                getTextLength() -bracePosition -2));
     }
 
     @Override
