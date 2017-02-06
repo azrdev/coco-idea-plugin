@@ -1,5 +1,8 @@
 Plugin for [Jetbrains](https://www.jetbrains.com/) IDEs
 to support grammar files (\*.atg) of the [Coco/R](http://ssw.jku.at/Coco/) compiler generator.
+Check it out from [Jetbrains' plugin repository](https://plugins.jetbrains.com/idea/plugin/9457-coco-r-grammar-support).
+
+![Screenshot of v3](doc/2017-02-06.v3.Screenshot.Cocoatg.png)
 
 ## Implementation
 
@@ -12,7 +15,8 @@ Following the [Custom Language Support Tutorial](http://www.jetbrains.org/intell
     - file header
     - configurable language and/or good guess
 
-- references: something misses for highlighting of all uses
+- references: something misses for highlighting of all uses (! works in coco.atg)
+    - references not resolved in IGNORE, COMMENTS
     - related: find usages, go to symbol
 - customizable syntax highlighting: [Color Settings Page](http://www.jetbrains.org/intellij/sdk/docs/tutorials/custom_language_support/syntax_highlighter_and_color_settings_page.html)
     - syntax highlighting: different colors for keywords, charsets, tokens, productions
