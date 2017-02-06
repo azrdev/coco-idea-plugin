@@ -20,7 +20,6 @@ class CocoLexer implements FlexLexer {
 
   /** initial size of the lookahead buffer */
   private static final int ZZ_BUFFERSIZE = 16384;
-  private static final String ZZ_NL = System.getProperty("line.separator");
 
   /** lexical states */
   public static final int YYINITIAL = 0;
@@ -446,23 +445,6 @@ int resolver_brace_depth = 0;
     return map;
   }
 
-  private static String zzToPrintable(CharSequence str) {
-    StringBuilder builder = new StringBuilder();
-    for (int n = 0 ; n < str.length() ; ) {
-      int ch = Character.codePointAt(str, n);
-      int charCount = Character.charCount(ch);
-      n += charCount;
-      if (ch > 31 && ch < 127) {
-        builder.append((char)ch);
-      } else if (charCount == 1) {
-        builder.append(String.format("\\u%04X", ch));
-      } else {
-        builder.append(String.format("\\U%06X", ch));
-      }
-    }
-    return builder.toString();
-  }
-
   public final int getTokenStart() {
     return zzStartRead;
   }
@@ -676,332 +658,189 @@ int resolver_brace_depth = 0;
       else {
         switch (zzAction < 0 ? zzAction : ZZ_ACTION[zzAction]) {
           case 1: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [54] {  }");
             { 
             }
           case 46: break;
           case 2: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [141] { return TokenType.BAD_CHARACTER; }");
             { return TokenType.BAD_CHARACTER;
             }
           case 47: break;
           case 3: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [59] { yybegin(global_decl); return CocoTypes.IDENT; }");
             { yybegin(global_decl); return CocoTypes.IDENT;
             }
           case 48: break;
           case 4: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [60] { return TokenType.WHITE_SPACE; }");
             { return TokenType.WHITE_SPACE;
             }
           case 49: break;
           case 5: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [118] { return CocoTypes.IDENT; }");
             { return CocoTypes.IDENT;
             }
           case 50: break;
           case 6: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [96] { return CocoTypes.EQUALS; }");
             { return CocoTypes.EQUALS;
             }
           case 51: break;
           case 7: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [97] { return CocoTypes.DOT; }");
             { return CocoTypes.DOT;
             }
           case 52: break;
           case 8: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [98] { return CocoTypes.PLUS; }");
             { return CocoTypes.PLUS;
             }
           case 53: break;
           case 9: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [99] { return CocoTypes.MINUS; }");
             { return CocoTypes.MINUS;
             }
           case 54: break;
           case 10: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [101] { return CocoTypes.OR; }");
             { return CocoTypes.OR;
             }
           case 55: break;
           case 11: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [104] { return CocoTypes.LPAREN; }");
             { return CocoTypes.LPAREN;
             }
           case 56: break;
           case 12: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [105] { return CocoTypes.RPAREN; }");
             { return CocoTypes.RPAREN;
             }
           case 57: break;
           case 13: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [106] { return CocoTypes.LSPAREN; }");
             { return CocoTypes.LSPAREN;
             }
           case 58: break;
           case 14: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [107] { return CocoTypes.RSPAREN; }");
             { return CocoTypes.RSPAREN;
             }
           case 59: break;
           case 15: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [108] { return CocoTypes.LAPAREN; }");
             { return CocoTypes.LAPAREN;
             }
           case 60: break;
           case 16: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [109] { return CocoTypes.RAPAREN; }");
             { return CocoTypes.RAPAREN;
             }
           case 61: break;
           case 17: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [128] { yybegin(resolver); }");
             { yybegin(resolver);
             }
           case 62: break;
           case 18: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [132] { ++resolver_brace_depth; }");
             { ++resolver_brace_depth;
             }
           case 63: break;
           case 19: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [133] { if(resolver_brace_depth <= 0) { yybegin(coco); return CocoTypes.RESOLVER; }"+ZZ_NL+"                          --resolver_brace_depth; }");
             { if(resolver_brace_depth <= 0) { yybegin(coco); return CocoTypes.RESOLVER; }
                           --resolver_brace_depth;
             }
           case 64: break;
           case 20: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [76] { return CocoTypes.STRING; }");
             { return CocoTypes.STRING;
             }
           case 65: break;
           case 21: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [81] { return CocoTypes.COMMENT; }");
             { return CocoTypes.COMMENT;
             }
           case 66: break;
           case 22: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [111] { yybegin(pre_resolver); resolver_brace_depth = 0; }");
             { yybegin(pre_resolver); resolver_brace_depth = 0;
             }
           case 67: break;
           case 23: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [91] { return CocoTypes.TO_KEYWORD; }");
             { return CocoTypes.TO_KEYWORD;
             }
           case 68: break;
           case 24: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [100] { return CocoTypes.DOTDOT; }");
             { return CocoTypes.DOTDOT;
             }
           case 69: break;
           case 25: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [121] { return CocoTypes.INSTRUMENTATION_CODE_ANGLE; }");
             { return CocoTypes.INSTRUMENTATION_CODE_ANGLE;
             }
           case 70: break;
           case 26: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [77] { return CocoTypes.CHARACTER; }");
             { return CocoTypes.CHARACTER;
             }
           case 71: break;
           case 27: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [95] { return CocoTypes.END_KEYWORD; }");
             { return CocoTypes.END_KEYWORD;
             }
           case 72: break;
           case 28: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [102] { return CocoTypes.ANY_KEYWORD; }");
             { return CocoTypes.ANY_KEYWORD;
             }
           case 73: break;
           case 29: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [110] { return CocoTypes.SYNC_KEYWORD; }");
             { return CocoTypes.SYNC_KEYWORD;
             }
           case 74: break;
           case 30: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [90] { return CocoTypes.FROM_KEYWORD; }");
             { return CocoTypes.FROM_KEYWORD;
             }
           case 75: break;
           case 31: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [103] { return CocoTypes.WEAK_KEYWORD; }");
             { return CocoTypes.WEAK_KEYWORD;
             }
           case 76: break;
           case 32: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [123] { return CocoTypes.INSTRUMENTATION_CODE_PARENDOT; }");
             { return CocoTypes.INSTRUMENTATION_CODE_PARENDOT;
             }
           case 77: break;
           case 33: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [122] { return CocoTypes.INSTRUMENTATION_CODE_ANGLEDOT; }");
             { return CocoTypes.INSTRUMENTATION_CODE_ANGLEDOT;
             }
           case 78: break;
           case 34: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [93] { return CocoTypes.IGNORE_KEYWORD; }");
             { return CocoTypes.IGNORE_KEYWORD;
             }
           case 79: break;
           case 35: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [92] { return CocoTypes.NESTED_KEYWORD; }");
             { return CocoTypes.NESTED_KEYWORD;
             }
           case 80: break;
           case 36: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [87] { return CocoTypes.TOKENS_KEYWORD; }");
             { return CocoTypes.TOKENS_KEYWORD;
             }
           case 81: break;
           case 37: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [112] { return CocoTypes.CONTEXT_KEYWORD; }");
             { return CocoTypes.CONTEXT_KEYWORD;
             }
           case 82: break;
           case 38: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [88] { return CocoTypes.PRAGMAS_KEYWORD; }");
             { return CocoTypes.PRAGMAS_KEYWORD;
             }
           case 83: break;
           case 39: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [53] { yypushback(yylength()); yybegin(compiler_decl); return CocoTypes.INSTRUMENTATION_CODE; }");
             { yypushback(yylength()); yybegin(compiler_decl); return CocoTypes.INSTRUMENTATION_CODE;
             }
           case 84: break;
           case 40: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [58] { return CocoTypes.COMPILER_KEYWORD; }");
             { return CocoTypes.COMPILER_KEYWORD;
             }
           case 85: break;
           case 41: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [89] { return CocoTypes.COMMENTS_KEYWORD; }");
             { return CocoTypes.COMMENTS_KEYWORD;
             }
           case 86: break;
           case 42: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [67] { yypushback(yylength()); yybegin(coco); return CocoTypes.INSTRUMENTATION_CODE; }");
             { yypushback(yylength()); yybegin(coco); return CocoTypes.INSTRUMENTATION_CODE;
             }
           case 87: break;
           case 43: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [86] { return CocoTypes.CHARACTERS_KEYWORD; }");
             { return CocoTypes.CHARACTERS_KEYWORD;
             }
           case 88: break;
           case 44: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [85] { return CocoTypes.IGNORECASE_KEYWORD; }");
             { return CocoTypes.IGNORECASE_KEYWORD;
             }
           case 89: break;
           case 45: 
-            System.out.println("match: --"+zzToPrintable(yytext())+"--");
-            System.out.println("action [94] { return CocoTypes.PRODUCTIONS_KEYWORD; }");
             { return CocoTypes.PRODUCTIONS_KEYWORD;
             }
           case 90: break;
           default:
             zzScanError(ZZ_NO_MATCH);
           }
-      }
-    }
-  }
-
-  /**
-   * Runs the scanner on input files.
-   *
-   * This main method is the debugging routine for the scanner.
-   * It prints debugging information about each returned token to
-   * System.out until the end of file is reached, or an error occured.
-   *
-   * @param argv   the command line, contains the filenames to run
-   *               the scanner on.
-   */
-  public static void main(String argv[]) {
-    if (argv.length == 0) {
-      System.out.println("Usage : java CocoLexer [ --encoding <name> ] <inputfile(s)>");
-    }
-    else {
-      int firstFilePos = 0;
-      String encodingName = "UTF-8";
-      if (argv[0].equals("--encoding")) {
-        firstFilePos = 2;
-        encodingName = argv[1];
-        try {
-          java.nio.charset.Charset.forName(encodingName); // Side-effect: is encodingName valid? 
-        } catch (Exception e) {
-          System.out.println("Invalid encoding '" + encodingName + "'");
-          return;
-        }
-      }
-      for (int i = firstFilePos; i < argv.length; i++) {
-        CocoLexer scanner = null;
-        try {
-          java.io.FileInputStream stream = new java.io.FileInputStream(argv[i]);
-          java.io.Reader reader = new java.io.InputStreamReader(stream, encodingName);
-          scanner = new CocoLexer(reader);
-          do {
-            System.out.println(scanner.advance());
-          } while (!scanner.zzAtEOF);
-
-        }
-        catch (java.io.FileNotFoundException e) {
-          System.out.println("File not found : \""+argv[i]+"\"");
-        }
-        catch (java.io.IOException e) {
-          System.out.println("IO error scanning file \""+argv[i]+"\"");
-          System.out.println(e);
-        }
-        catch (Exception e) {
-          System.out.println("Unexpected exception:");
-          e.printStackTrace();
-        }
       }
     }
   }

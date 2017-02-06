@@ -12,7 +12,6 @@ import com.intellij.psi.TokenType;
 %unicode
 %function advance
 %type IElementType
-%debug
 
 
 letter = [a-z|A-Z|_]
