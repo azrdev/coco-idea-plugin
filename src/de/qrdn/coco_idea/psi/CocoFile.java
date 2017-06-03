@@ -17,23 +17,17 @@ import java.util.Map;
 
 public class CocoFile extends PsiFileBase {
 
-    private final CachedValue<Map<String, CocoSetDecl>> character_classes;
+    private final Map<String, CocoSetDecl> character_classes;
     // TODO: also track implicitly defined tokens, i.e. literal strings in the productions
-    private final CachedValue<Map<String, CocoTokenDecl>> tokens;
-    private final CachedValue<Map<String, CocoProduction>> productions;
+    private final Map<String, CocoTokenDecl> tokens;
+    private final Map<String, CocoProduction> productions;
 
 
     public CocoFile(@NotNull FileViewProvider viewProvider) {
         super(viewProvider, CocoLanguage.INSTANCE);
-        character_classes = CachedValuesManager.getManager(getProject()).createCachedValue(
-                () -> CachedValueProvider.Result.create(calcCharacterClasses(), CocoFile.class),
-                false);
-        tokens = CachedValuesManager.getManager(getProject()).createCachedValue(
-                () -> CachedValueProvider.Result.create(calcTokens(), CocoFile.class),
-                false);
-        productions = CachedValuesManager.getManager(getProject()).createCachedValue(
-                () -> CachedValueProvider.Result.create(calcProductions(), CocoFile.class),
-                false);
+        character_classes = calcCharacterClasses();
+        tokens = calcTokens();
+        productions = calcProductions();
     }
 
     private Map<String, CocoSetDecl> calcCharacterClasses() {
@@ -78,17 +72,17 @@ public class CocoFile extends PsiFileBase {
     }
 
     public PsiElement getTokenOrProduction(String referenceName) {
-        if(productions.getValue().containsKey(referenceName)) {
-            return productions.getValue().get(referenceName);
-        } else if(tokens.getValue().containsKey(referenceName)) {
-            return tokens.getValue().get(referenceName);
+        if(productions.containsKey(referenceName)) {
+            return productions.get(referenceName);
+        } else if(tokens.containsKey(referenceName)) {
+            return tokens.get(referenceName);
         }
         return null;
     }
 
     public PsiElement getCharacterClass(String referenceName) {
-        if(character_classes.getValue().containsKey(referenceName)) {
-            return character_classes.getValue().get(referenceName);
+        if(character_classes.containsKey(referenceName)) {
+            return character_classes.get(referenceName);
         }
         return null;
     }
