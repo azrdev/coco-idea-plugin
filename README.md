@@ -15,7 +15,7 @@ Following the [Custom Language Support Tutorial](http://www.jetbrains.org/intell
     - file header
     - configurable language and/or good guess
 
-- references: something misses for highlighting of all uses (! works in coco.atg)
+- references
     - references not resolved in IGNORE, COMMENTS
     - related: find usages, go to symbol
 - customizable syntax highlighting: [Color Settings Page](http://www.jetbrains.org/intellij/sdk/docs/tutorials/custom_language_support/syntax_highlighter_and_color_settings_page.html)

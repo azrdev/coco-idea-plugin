@@ -31,7 +31,7 @@ public abstract class CocoSemTextImpl
     @NotNull
     @Override
     public TextRange getRelevantTextRange() {
-        return getTextRange().cutOut(TextRange.create(2, getTextLength() -2));
+        return TextRange.create(2, getTextLength() -2);
     }
 
     @NotNull
