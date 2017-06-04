@@ -1,14 +1,22 @@
-<idea-plugin version="2">
+<idea-plugin>
   <id>de.qrdn.coco_idea</id>
   <name>Coco/R grammar support</name>
-  <version>3.0</version>
+  <version>4.0</version>
   <vendor email="azrdev@qrdn.de" url="https://github.com/azrdev/coco-idea-plugin">azrdev</vendor>
 
   <description><![CDATA[
   Plugin for Jetbrains IDEs to support grammar files (*.atg) of the <a href="http://ssw.jku.at/Coco/">Coco/R</a> compiler generator.
+
+  Feel free to contribute issues, code, feature requests or simply your "I'm using it!" stance.
     ]]></description>
 
   <change-notes><![CDATA[
+<h3>v4</h3><ul>
+    <li>Implement Find Usages</li>
+    <li>Implement Folding</li>
+    <li>Fix Reference highlighting for large files</li>
+    <li>Fix plugin errors about TextRange & CachedValue</li>
+</ul>
 <h3>v3</h3>
  first published version. features complete parser, syntax highlighting, file structure view, basic reference support.
     ]]>
