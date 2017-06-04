@@ -31,6 +31,7 @@
     <lang.braceMatcher language="Coco" implementationClass="de.qrdn.coco_idea.CocoBraceMatcher"/>
     <lang.psiStructureViewFactory language="Coco" implementationClass="de.qrdn.coco_idea.CocoStructureViewFactory"/>
     <lang.findUsagesProvider language="Coco" implementationClass="de.qrdn.coco_idea.CocoFindUsagesProvider" />
+    <elementDescriptionProvider implementation="de.qrdn.coco_idea.CocoElementDescriptionProvider" />
     <!-- inject instrumentation language into appropriate coco code blocks -->
     <languageInjector implementation="de.qrdn.coco_idea.CocoLanguageInjector"/>
   </extensions>

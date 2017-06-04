@@ -10,6 +10,7 @@ import de.qrdn.coco_idea.psi.*;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+//TODO: only usages found, not definitions
 public class CocoFindUsagesProvider implements FindUsagesProvider {
     @Nullable
     @Override
@@ -35,6 +36,7 @@ public class CocoFindUsagesProvider implements FindUsagesProvider {
     @NotNull
     @Override
     public String getType(@NotNull PsiElement element) {
+        //TODO: never hit, all results are "unclassified usage"
         if(element instanceof CocoProduction)
             return "production";
         else if(element instanceof CocoSetDecl)
