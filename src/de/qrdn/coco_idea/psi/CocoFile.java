@@ -4,9 +4,6 @@ import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.CachedValue;
-import com.intellij.psi.util.CachedValueProvider;
-import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.util.containers.ContainerUtil;
 import de.qrdn.coco_idea.CocoFileType;
 import de.qrdn.coco_idea.CocoLanguage;
@@ -17,7 +14,7 @@ import java.util.Map;
 
 public class CocoFile extends PsiFileBase {
 
-    private final Map<String, CocoSetDecl> character_classes;
+    private final Map<String, CocoSetDecl> characterClasses;
     // TODO: also track implicitly defined tokens, i.e. literal strings in the productions
     private final Map<String, CocoTokenDecl> tokens;
     private final Map<String, CocoProduction> productions;
@@ -25,7 +22,7 @@ public class CocoFile extends PsiFileBase {
 
     public CocoFile(@NotNull FileViewProvider viewProvider) {
         super(viewProvider, CocoLanguage.INSTANCE);
-        character_classes = calcCharacterClasses();
+        characterClasses = calcCharacterClasses();
         tokens = calcTokens();
         productions = calcProductions();
     }
@@ -81,9 +78,21 @@ public class CocoFile extends PsiFileBase {
     }
 
     public PsiElement getCharacterClass(String referenceName) {
-        if(character_classes.containsKey(referenceName)) {
-            return character_classes.get(referenceName);
+        if(characterClasses.containsKey(referenceName)) {
+            return characterClasses.get(referenceName);
         }
         return null;
+    }
+
+    public final Map<String, CocoSetDecl> getCharacterClasses() {
+        return characterClasses;
+    }
+
+    public final Map<String, CocoTokenDecl> getTokens() {
+        return tokens;
+    }
+
+    public final Map<String, CocoProduction> getProductions() {
+        return productions;
     }
 }

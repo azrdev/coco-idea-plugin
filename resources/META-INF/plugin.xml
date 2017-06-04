@@ -32,6 +32,7 @@
     <lang.psiStructureViewFactory language="Coco" implementationClass="de.qrdn.coco_idea.CocoStructureViewFactory"/>
     <lang.findUsagesProvider language="Coco" implementationClass="de.qrdn.coco_idea.CocoFindUsagesProvider" />
     <elementDescriptionProvider implementation="de.qrdn.coco_idea.CocoElementDescriptionProvider" />
+    <lang.foldingBuilder language="Coco" implementationClass="de.qrdn.coco_idea.CocoFoldingBuilder" />
     <!-- inject instrumentation language into appropriate coco code blocks -->
     <languageInjector implementation="de.qrdn.coco_idea.CocoLanguageInjector"/>
   </extensions>
