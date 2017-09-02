@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>de.qrdn.coco_idea</id>
   <name>Coco/R grammar support</name>
-  <version>4.2</version>
+  <version>4.3</version>
   <vendor email="azrdev@qrdn.de" url="https://github.com/azrdev/coco-idea-plugin">azrdev</vendor>
 
   <description><![CDATA[
@@ -42,8 +42,8 @@
     <lang.findUsagesProvider language="Coco" implementationClass="de.qrdn.coco_idea.CocoFindUsagesProvider" />
     <elementDescriptionProvider implementation="de.qrdn.coco_idea.CocoElementDescriptionProvider" />
     <lang.foldingBuilder language="Coco" implementationClass="de.qrdn.coco_idea.CocoFoldingBuilder" />
-    <!-- inject instrumentation language into appropriate coco code blocks -->
-    <languageInjector implementation="de.qrdn.coco_idea.CocoLanguageInjector"/>
+    <!-- inject instrumentation language into appropriate Coco code blocks -->
+    <lang.fileViewProviderFactory language="Coco" implementationClass="de.qrdn.coco_idea.CocoFileViewProviderFactory"/>
   </extensions>
 
   <actions>

@@ -29,8 +29,6 @@ public class CocoFile extends PsiFileBase {
     private final Map<String, CocoProduction> productions;
 
     private final Logger logger = Logger.getInstance("Coco");
-    @Nullable
-    private Language instrumentationLanguage;
 
 
     public CocoFile(@NotNull FileViewProvider viewProvider) {
@@ -111,41 +109,5 @@ public class CocoFile extends PsiFileBase {
 
     public final Map<String, CocoProduction> getProductions() {
         return productions;
-    }
-
-    @Nullable
-    public Language getInstrumentationLanguage() {
-        if(instrumentationLanguage == null) {
-            //TODO: configure instrumentation language
-            for (FileTypeRegistry.FileTypeDetector detector :
-                    Extensions.getExtensions(FileTypeRegistry.FileTypeDetector.EP_NAME)) {
-                final FileType fileType = null; //XXX detector.detect();
-                if(fileType instanceof LanguageFileType) {
-                    instrumentationLanguage = ((LanguageFileType) fileType).getLanguage();
-                    break;
-                }
-            }
-
-            // FIXME: language IDs are mostly wild guesses
-            if(PlatformUtils.isIntelliJ())
-                instrumentationLanguage = Language.findLanguageByID("JAVA");
-            else if(PlatformUtils.isRubyMine())
-                instrumentationLanguage = Language.findLanguageByID("RUBY");
-            else if(PlatformUtils.isAppCode())
-                instrumentationLanguage = Language.findLanguageByID("SWIFT");
-            else if(PlatformUtils.isCLion())
-                instrumentationLanguage = Language.findLanguageByID("CPP");
-            else if(PlatformUtils.isPyCharm())
-                instrumentationLanguage = Language.findLanguageByID("PYTHON");
-            else if(PlatformUtils.isPhpStorm())
-                instrumentationLanguage = Language.findLanguageByID("PHP");
-            else if(PlatformUtils.isWebStorm())
-                instrumentationLanguage = Language.findLanguageByID("JAVASCRIPT");
-            else if(PlatformUtils.isRider())
-                instrumentationLanguage = Language.findLanguageByID("CSHARP");
-            else if(PlatformUtils.isGoIde())
-                instrumentationLanguage = Language.findLanguageByID("GO");
-        }
-        return instrumentationLanguage;
     }
 }
