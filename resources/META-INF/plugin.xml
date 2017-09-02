@@ -7,7 +7,8 @@
   <description><![CDATA[
   Plugin for Jetbrains IDEs to support grammar files (*.atg) of the <a href="http://ssw.jku.at/Coco/">Coco/R</a> compiler generator.
   <br/>
-  I'm happy to getting your issues, code, feature requests or simply an "I'm using it!" stance on the <a href="https://github.com/azrdev/coco-idea-plugin">projects' GitHub site</a>.
+  I'm happy to getting your issues, code, feature requests or simply an "I'm using it!" stance here or on the
+  <a href="https://github.com/azrdev/coco-idea-plugin">projects' GitHub site</a>.
     ]]></description>
 
   <change-notes><![CDATA[

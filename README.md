@@ -16,13 +16,14 @@ Following the [Custom Language Support Tutorial](http://www.jetbrains.org/intell
     - prefix & suffix as needed
     - file header
 
+- folding: comments, injected blocks (esp. at file start)
 - references: not resolved in IGNORE, COMMENTS, PRAGMAS
 - customizable syntax highlighting: [Color Settings Page](http://www.jetbrains.org/intellij/sdk/docs/tutorials/custom_language_support/syntax_highlighter_and_color_settings_page.html)
     - syntax highlighting: different colors for keywords, charsets, tokens, productions
 - PRAGMAs in structure view
 - `$CNF` file header
 
-- code completion, templates, "new file" (template), build system integration, quick fix ...
+- code completion, templates, "new file" (template), build system integration, quick fix, code style, ...
 
 # Tutorial deficits
 - "register" occurs in plugin.xml
@@ -37,6 +38,14 @@ What may help understanding the tutorial:
 - meta-plugin for using ANTLR-grammar in jetbrains IDEs: [Code](https://github.com/antlr/jetbrains) and [forum announcement](https://intellij-support.jetbrains.com/hc/en-us/community/posts/206103369-Using-ANTLR-v4-to-lex-parse-custom-file-formats)
 
 ## howto language embedding, other plugins & forum posts
+
+- <https://intellij-support.jetbrains.com/hc/en-us/community/posts/206122689-Embedding-custom-languages-in-HTML-script-tags->
+
+gitter.im Alexander Zolotov @zolotov 2017-08-15 09:17
+> You can properly lex/parse A language inside B language to get rid of injection A into B. We do so for CSS and JS in HTML, or for Python in SQL, so you can write JS in HTML and inject something into that JS.
+Take a look at com.intellij.psi.impl.source.tree.LazyParseablePsiElement and com.intellij.lexer.EmbeddedTokenTypesProvider (this one is for embedding into HTML)
+
+<https://github.com/bjansen/pebble-intellij/commit/72640eeddbb650204f45e9578581b2b1550319bb#diff-b576c185db1751b8f65142d839a73714>
 
 [This thread about the *Play!* plugin](https://intellij-support.jetbrains.com/hc/en-us/community/posts/206780275-Example-of-a-custom-language-plugin-for-a-templating-language)[^1] explains the differences between the three possible embedding "types":
 
