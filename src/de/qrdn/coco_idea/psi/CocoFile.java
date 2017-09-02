@@ -1,6 +1,7 @@
 package de.qrdn.coco_idea.psi;
 
 import com.intellij.extapi.psi.PsiFileBase;
+import com.intellij.openapi.diagnostic.Logger;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
@@ -8,6 +9,7 @@ import com.intellij.util.containers.ContainerUtil;
 import de.qrdn.coco_idea.CocoFileType;
 import de.qrdn.coco_idea.CocoLanguage;
 import de.qrdn.coco_idea.CocoUtil;
+import org.apache.log4j.Level;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Map;
@@ -19,9 +21,12 @@ public class CocoFile extends PsiFileBase {
     private final Map<String, CocoTokenDecl> tokens;
     private final Map<String, CocoProduction> productions;
 
+    private final Logger logger = Logger.getInstance("Coco");
+
 
     public CocoFile(@NotNull FileViewProvider viewProvider) {
         super(viewProvider, CocoLanguage.INSTANCE);
+        logger.setLevel(Level.DEBUG);
         characterClasses = calcCharacterClasses();
         tokens = calcTokens();
         productions = calcProductions();
@@ -34,6 +39,7 @@ public class CocoFile extends PsiFileBase {
                 result.put(o.getName(), o);
             }
         }
+        logger.debug("Scanned for CharacterClasses: found " + result.size());
         return result;
     }
 
@@ -44,6 +50,7 @@ public class CocoFile extends PsiFileBase {
                 result.put(o.getName(), o);
             }
         }
+        logger.debug("Scanned for Tokens: found " + result.size());
         return result;
     }
 
@@ -54,6 +61,7 @@ public class CocoFile extends PsiFileBase {
                 result.put(o.getName(), o);
             }
         }
+        logger.debug("Scanned for Productions: found " + result.size());
         return result;
     }
 
