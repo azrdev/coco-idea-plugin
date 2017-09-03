@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>de.qrdn.coco_idea</id>
   <name>Coco/R grammar support</name>
-  <version>4.3</version>
+  <version>4.4</version>
   <vendor email="azrdev@qrdn.de" url="https://github.com/azrdev/coco-idea-plugin">azrdev</vendor>
 
   <description><![CDATA[
