@@ -36,6 +36,8 @@ TraditionalComment   = "/*" ~"*/"
 EndOfLineComment     = "//"[^\r\n]*(\n|\r|\r\n)?
 
 %s compiler_decl global_decl coco pre_resolver resolver
+%s instrumentation_angle instrumentation_angledot instrumentation_parendot
+%s post_instrumentation_angle post_instrumentation_angledot post_instrumentation_parendot
 
 %{
 /** in state "resolver", count the level of nested braces that we're in */
@@ -117,9 +119,48 @@ int resolver_brace_depth = 0;
     {ident}             { return CocoTypes.IDENT; }
 
     // instrumentation code
-    "<" ~">"            { return CocoTypes.INSTRUMENTATION_CODE_ANGLE; }
-    "<." ~".>"          { return CocoTypes.INSTRUMENTATION_CODE_ANGLEDOT; }
-    "(." ~".)"          { return CocoTypes.INSTRUMENTATION_CODE_PARENDOT; }
+    "<"                 { yybegin(instrumentation_angle); return CocoTypes.ANGLE_L; }
+    "<."                { yybegin(instrumentation_angledot); return CocoTypes.ANGLEDOT_L; }
+    "(."                { yybegin(instrumentation_parendot); return CocoTypes.PARENDOT_L; }
+}
+
+<instrumentation_angle> {
+    ">"                 {
+                          yypushback(yylength());
+                          yybegin(post_instrumentation_angle);
+                          return CocoTypes.INSTRUMENTATION_CODE;
+                        }
+    [^]                 { }
+}
+
+<post_instrumentation_angle> {
+    ">"                 { yybegin(coco); return CocoTypes.ANGLE_R; }
+}
+
+<instrumentation_angledot> {
+    ".>"                {
+                          yypushback(yylength());
+                          yybegin(post_instrumentation_angledot);
+                          return CocoTypes.INSTRUMENTATION_CODE;
+                        }
+    [^]                 { }
+}
+
+<post_instrumentation_angledot> {
+    ".>"                { yybegin(coco); return CocoTypes.ANGLEDOT_R; }
+}
+
+<instrumentation_parendot> {
+    ".)"                {
+                          yypushback(yylength());
+                          yybegin(post_instrumentation_parendot);
+                          return CocoTypes.INSTRUMENTATION_CODE;
+                        }
+    [^]                 { }
+}
+
+<post_instrumentation_parendot> {
+    ".)"                { yybegin(coco); return CocoTypes.PARENDOT_R; }
 }
 
 <pre_resolver> {

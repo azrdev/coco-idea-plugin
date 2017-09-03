@@ -34,15 +34,12 @@ public class CocoFileViewProvider
         if(instrumentedLanguage == null) {
             instrumentedLanguage = PlainTextLanguage.INSTANCE;
         }
-        //TODO: set instrumentation lang dependend on IDE, e.g. C++ for CLion
-        //TODO: let user select instrumentation lang
-        // some magic?
+        //TODO: set default instrumentation lang dependend on IDE, e.g. C++ for CLion
         Language substituteLanguage = LanguageSubstitutors.INSTANCE.substituteLanguage(instrumentedLanguage, file, manager.getProject());
         if(TemplateDataLanguageMappings.getTemplateableLanguages().contains(substituteLanguage))
             instrumentedLanguage = substituteLanguage;
     }
 
-    /** ctor to be used by self */
     private CocoFileViewProvider(PsiManager manager, VirtualFile file, boolean eventSystemEnabled,
                                  Language instrumentedLanguage) {
         super(manager, file, eventSystemEnabled);

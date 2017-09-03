@@ -131,7 +131,6 @@ public class CocoPsiImplUtil {
 
     public static ItemPresentation getPresentation(final CocoCharacters element) {
         return new ItemPresentation() {
-            @Nullable
             @Override
             public String getPresentableText() {
                 return "Character Set definitions";
@@ -153,7 +152,6 @@ public class CocoPsiImplUtil {
 
     public static ItemPresentation getPresentation(final CocoTokens element) {
         return new ItemPresentation() {
-            @Nullable
             @Override
             public String getPresentableText() {
                 return "Token definitions";
@@ -175,7 +173,6 @@ public class CocoPsiImplUtil {
 
     public static ItemPresentation getPresentation(final CocoProductions element) {
         return new ItemPresentation() {
-            @Nullable
             @Override
             public String getPresentableText() {
                 return "Production rules";
