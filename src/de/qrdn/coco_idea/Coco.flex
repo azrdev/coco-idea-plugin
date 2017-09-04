@@ -8,6 +8,7 @@ import com.intellij.psi.TokenType;
 %%
 
 %class CocoLexer
+%public
 %implements FlexLexer
 %unicode
 %function advance

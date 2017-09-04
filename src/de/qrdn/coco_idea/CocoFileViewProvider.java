@@ -11,6 +11,7 @@ import com.intellij.psi.templateLanguages.*;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.util.containers.ContainerUtil;
 import de.qrdn.coco_idea.psi.CocoElementType;
+import de.qrdn.coco_idea.psi.CocoTemplateDataElementType;
 import de.qrdn.coco_idea.psi.CocoTypes;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -78,12 +79,7 @@ public class CocoFileViewProvider
             PsiFileImpl psiFile = (PsiFileImpl) LanguageParserDefinitions.INSTANCE.forLanguage(lang).createFile(this);
             // see <https://github.com/bjansen/pebble-intellij/blob/master/src/main/kotlin/com/github/bjansen/intellij/pebble/lang/PebbleFileViewProviderFactory.kt#L52>
             //TODO: cache per lang.id
-            final IElementType COCO_FRAGMENT = new CocoElementType("COCO_FRAGMENT");
-            final TemplateDataElementType templateDataElementType = new TemplateDataElementType(
-                    "COCO_INSTRUMENTATION_LANGUAGE", CocoLanguage.INSTANCE,
-                    CocoTypes.INSTRUMENTATION_CODE, /* the elements from Coco Psi to handle */
-                    COCO_FRAGMENT /* the elements to insert into instrumentation Psi instead of non-instr. Coco elements */);
-            psiFile.setContentElementType(templateDataElementType);
+            psiFile.setContentElementType(new CocoTemplateDataElementType());
             return psiFile;
         } else if(lang == CocoLanguage.INSTANCE) {
             // create Psi for Coco
