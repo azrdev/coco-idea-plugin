@@ -1,9 +1,7 @@
 package de.qrdn.coco_idea.psi;
 
-import com.intellij.lang.Language;
 import com.intellij.lexer.Lexer;
 import com.intellij.psi.templateLanguages.TemplateDataElementType;
-import com.intellij.psi.tree.IElementType;
 import de.qrdn.coco_idea.CocoLanguage;
 import de.qrdn.coco_idea.CocoLexer;
 import org.jetbrains.annotations.NotNull;

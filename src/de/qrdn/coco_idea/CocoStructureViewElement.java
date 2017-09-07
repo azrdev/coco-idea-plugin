@@ -30,6 +30,8 @@ public class CocoStructureViewElement implements StructureViewTreeElement, Sorta
         return element;
     }
 
+    //TODO: collapse Characters & Tokens by default
+
     @NotNull
     @Override
     public ItemPresentation getPresentation() {

@@ -46,6 +46,7 @@ public class CocoFoldingBuilder extends FoldingBuilderEx {
                 }
             }
         }
+        //TODO: fold comments
 
         return descriptors.toArray(new FoldingDescriptor[descriptors.size()]);
     }
