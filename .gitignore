@@ -2,3 +2,4 @@ gen/
 idea-flex.skeleton
 *.jar
 out/
+src/de/qrdn/coco_idea/CocoLexer.java~
