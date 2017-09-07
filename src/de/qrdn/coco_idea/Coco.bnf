@@ -52,9 +52,12 @@
         space='regexp:\s'
 
         INSTRUMENTATION_CODE='regexp:[^]'
-        INSTRUMENTATION_CODE_PARENDOT='regexp:(\.[^]*\.)'
-        INSTRUMENTATION_CODE_ANGLE='regexp:<[^]*>'
-        INSTRUMENTATION_CODE_ANGLEDOT='regexp:<\.[^]*\.>'
+        PARENDOT_L="(."
+        PARENDOT_R=".)"
+        ANGLE_L='<'
+        ANGLE_R='>'
+        ANGLEDOT_L='<.'
+        ANGLEDOT_R='.>'
     ]
 
     // CocoNamedElement used for reference resolution
@@ -67,14 +70,6 @@
     mixin("CHARACTERS|TOKENS|PRODUCTIONS")="de.qrdn.coco_idea.psi.impl.CocoFileSectionImpl"
     implements("CHARACTERS|TOKENS|PRODUCTIONS")="de.qrdn.coco_idea.psi.CocoFileSection"
     methods("CHARACTERS|TOKENS|PRODUCTIONS")=[getDeclarations getPresentation]
-    // CocoInstrumentationCode used for instrumentation Language Injection
-    mixin("include_header")="de.qrdn.coco_idea.psi.impl.CocoIncludeHeaderImpl"
-    mixin("global_decls")="de.qrdn.coco_idea.psi.impl.CocoGlobalDeclsImpl"
-    mixin("attribs")="de.qrdn.coco_idea.psi.impl.CocoAttribsImpl"
-    mixin("sem_text")="de.qrdn.coco_idea.psi.impl.CocoSemTextImpl"
-    mixin("attr_decl")="de.qrdn.coco_idea.psi.impl.CocoAttrDeclImpl"
-    mixin("resolver_rule")="de.qrdn.coco_idea.psi.impl.CocoResolverImpl"
-    implements("include_header|global_decls|attribs|sem_text|attr_decl|resolver_rule")="de.qrdn.coco_idea.psi.CocoInstrumentationCode"
 }
 
 //TODO: more pin, recoverWhile attributes to parse broken files
@@ -100,8 +95,8 @@ private scanner_spec ::=
     ignore_spec*
   {pin=3}
 
-private include_header ::= INSTRUMENTATION_CODE
-private global_decls ::= INSTRUMENTATION_CODE
+private include_header ::= instrumentation_code_rule
+private global_decls ::= instrumentation_code_rule
 private parser_spec ::= PRODUCTIONS
 private pragmas ::= PRAGMAS_KEYWORD token_decl*
   {pin=1}
@@ -124,7 +119,7 @@ set_decl ::= ident_rule '=' set '.'
 set ::= sim_set ('+' sim_set | '-' sim_set)*
 sim_set ::= ident_rule | string | character ['..' character] | ANY_KEYWORD
 token_decl ::= sym [ '=' token_expr '.' ] [ sem_text ]
-private attr_decl ::= INSTRUMENTATION_CODE_ANGLE | INSTRUMENTATION_CODE_ANGLEDOT
+private attr_decl ::= attr_spec
 expression ::= term ( '|' term )*
 term ::= ( [resolver_rule] factor factor* )?
 factor ::=
@@ -147,11 +142,18 @@ token_factor ::=
     | '[' token_expr ']'
     | '{' token_expr '}'
 sym ::= ( ident_rule | string | character )
-private attribs ::= INSTRUMENTATION_CODE_ANGLE | INSTRUMENTATION_CODE_ANGLEDOT
-private sem_text ::= INSTRUMENTATION_CODE_PARENDOT
+private attribs ::= attr_spec
+private sem_text ::= PARENDOT_L instrumentation_code_rule PARENDOT_R
+  {pin=1}
 production ::= ident_rule attr_decl? sem_text? '=' expression '.'
   {pin=4}
+
+private attr_spec ::=
+    ANGLE_L instrumentation_code_rule ANGLE_R
+  | ANGLEDOT_L instrumentation_code_rule ANGLEDOT_R
+  {pin=1}
 
 // rules needed only so we have a Psi*Impl class
 ident_rule ::= ident
 resolver_rule ::= resolver
+instrumentation_code_rule ::= INSTRUMENTATION_CODE
