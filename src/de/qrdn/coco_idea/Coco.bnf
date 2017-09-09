@@ -70,6 +70,9 @@
     mixin("CHARACTERS|TOKENS|PRODUCTIONS")="de.qrdn.coco_idea.psi.impl.CocoFileSectionImpl"
     implements("CHARACTERS|TOKENS|PRODUCTIONS")="de.qrdn.coco_idea.psi.CocoFileSection"
     methods("CHARACTERS|TOKENS|PRODUCTIONS")=[getDeclarations getPresentation]
+    // CocoInstrumentationCode used for instrumentation Language Injection
+    mixin("instrumentation_code_rule")="de.qrdn.coco_idea.psi.impl.CocoInstrumentationCodeImpl"
+    methods("sym_ref")=[getName]
 }
 
 //TODO: more pin, recoverWhile attributes to parse broken files
@@ -95,8 +98,8 @@ private scanner_spec ::=
     ignore_spec*
   {pin=3}
 
-private include_header ::= instrumentation_code_rule
-private global_decls ::= instrumentation_code_rule
+include_header ::= instrumentation_code_rule
+global_decls ::= instrumentation_code_rule
 private parser_spec ::= PRODUCTIONS
 private pragmas ::= PRAGMAS_KEYWORD token_decl*
   {pin=1}
@@ -119,13 +122,10 @@ set_decl ::= ident_rule '=' set '.'
 set ::= sim_set ('+' sim_set | '-' sim_set)*
 sim_set ::= ident_rule | string | character ['..' character] | ANY_KEYWORD
 token_decl ::= sym [ '=' token_expr '.' ] [ sem_text ]
-private attr_decl ::= attr_spec
 expression ::= term ( '|' term )*
 term ::= ( [resolver_rule] factor factor* )?
 factor ::=
-        [ WEAK_KEYWORD ]
-        sym
-        [ attribs ]
+        [ WEAK_KEYWORD ] sym_ref
     | '(' expression ')'
     | '[' expression ']'
     | '{' expression '}'
@@ -142,12 +142,12 @@ token_factor ::=
     | '[' token_expr ']'
     | '{' token_expr '}'
 sym ::= ( ident_rule | string | character )
-private attribs ::= attr_spec
-private sem_text ::= PARENDOT_L instrumentation_code_rule PARENDOT_R
+sym_ref ::= sym [ attr_spec ]
   {pin=1}
-production ::= ident_rule attr_decl? sem_text? '=' expression '.'
+sem_text ::= PARENDOT_L instrumentation_code_rule PARENDOT_R
+  {pin=1}
+production ::= ident_rule attr_spec? sem_text? '=' expression '.'
   {pin=4}
-
 private attr_spec ::=
     ANGLE_L instrumentation_code_rule ANGLE_R
   | ANGLEDOT_L instrumentation_code_rule ANGLEDOT_R

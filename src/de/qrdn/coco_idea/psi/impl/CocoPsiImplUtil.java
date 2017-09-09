@@ -191,4 +191,10 @@ public class CocoPsiImplUtil {
             }
         };
     }
+
+    // delegates for CocoSymRef
+
+    public static String getName(@NotNull CocoSymRef element) {
+        return element.getSym().getIdentRule().getName();
+    }
 }
