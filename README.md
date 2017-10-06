@@ -13,8 +13,6 @@ Following the [Custom Language Support Tutorial](http://www.jetbrains.org/intell
 # TODOs
 * language injection
     - configurable language and/or good guess
-    - prefix & suffix as needed
-    - file header
 
 - folding: comments, injected blocks (esp. at file start)
 - references: not resolved in IGNORE, COMMENTS, PRAGMAS

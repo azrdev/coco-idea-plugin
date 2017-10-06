@@ -61,7 +61,7 @@
     ]
 
     // CocoNamedElement used for reference resolution
-    mixin("set_decl|token_decl|production")="de.qrdn.coco_idea.psi.impl.CocoNamedElementImpl"
+    mixin("set_decl|token_decl")="de.qrdn.coco_idea.psi.impl.CocoNamedElementImpl" // production excluded, because its mixin is needed below for CocoProductionInjectionHost
     implements("set_decl|token_decl|production")="de.qrdn.coco_idea.psi.CocoNamedElement"
     methods("set_decl|token_decl|production")=[getName setName getPresentation getNameIdentifier]
     implements("ident_rule")="com.intellij.psi.PsiNamedElement"
@@ -70,14 +70,17 @@
     mixin("CHARACTERS|TOKENS|PRODUCTIONS")="de.qrdn.coco_idea.psi.impl.CocoFileSectionImpl"
     implements("CHARACTERS|TOKENS|PRODUCTIONS")="de.qrdn.coco_idea.psi.CocoFileSection"
     methods("CHARACTERS|TOKENS|PRODUCTIONS")=[getDeclarations getPresentation]
-    // CocoInstrumentationCode used for instrumentation Language Injection
+    // CocoInstrumentationCode and CocoProduction used for instrumentation Language Injection
     mixin("instrumentation_code_rule")="de.qrdn.coco_idea.psi.impl.CocoInstrumentationCodeImpl"
+    mixin("production")="de.qrdn.coco_idea.psi.impl.CocoProductionInjectionHost"
+    implements("instrumentation_code_rule|production")="com.intellij.psi.PsiLanguageInjectionHost"
     methods("sym_ref")=[getName]
 }
 
 //TODO: more pin, recoverWhile attributes to parse broken files
 
-coco_file ::=
+coco_file ::= whole_file // workaround so CocoLanguageInjector fires
+whole_file ::=
     include_header
     compiler_decl
     global_decls
@@ -148,7 +151,7 @@ sem_text ::= PARENDOT_L instrumentation_code_rule PARENDOT_R
   {pin=1}
 production ::= ident_rule attr_spec? sem_text? '=' expression '.'
   {pin=4}
-private attr_spec ::=
+attr_spec ::=
     ANGLE_L instrumentation_code_rule ANGLE_R
   | ANGLEDOT_L instrumentation_code_rule ANGLEDOT_R
   {pin=1}
