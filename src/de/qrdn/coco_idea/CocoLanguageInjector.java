@@ -58,6 +58,8 @@ public class CocoLanguageInjector implements MultiHostInjector {
     private static void inject(@NotNull MultiHostRegistrar registrar,
                                @Nullable String prefix, @Nullable String suffix,
                                @NotNull PsiLanguageInjectionHost host) {
+        if(host.getTextLength() < 1)
+            return;
         registrar.addPlace(prefix, suffix, host, TextRange.from(1, host.getTextLength() -1));
     }
 
