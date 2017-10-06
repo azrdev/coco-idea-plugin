@@ -23,7 +23,6 @@ public class CocoSyntaxHighlighter extends SyntaxHighlighterBase {
         fillMap(ATTRIBUTES, CocoTokenTypeSets.PARENTHESES, CocoHighlighterColors.PARENTHESES);
         fillMap(ATTRIBUTES, CocoTokenTypeSets.OPERATORS, CocoHighlighterColors.OPERATORS);
         fillMap(ATTRIBUTES, CocoTokenTypeSets.STRING, CocoHighlighterColors.STRING);
-        fillMap(ATTRIBUTES, CocoTokenTypeSets.INSTRUMENTATION_CODE, EditorColors.INJECTED_LANGUAGE_FRAGMENT);
     }
 
     @NotNull
