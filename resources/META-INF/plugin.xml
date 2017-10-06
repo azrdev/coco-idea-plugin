@@ -1,7 +1,7 @@
 <idea-plugin>
   <id>de.qrdn.coco_idea</id>
   <name>Coco/R grammar support</name>
-  <version>5</version>
+  <version>6</version>
   <vendor email="azrdev@qrdn.de" url="https://github.com/azrdev/coco-idea-plugin">azrdev</vendor>
 
   <description><![CDATA[
@@ -12,6 +12,10 @@
     ]]></description>
 
   <change-notes><![CDATA[
+<h3>v6</h3><ul>
+  <li>Implement language injection: Semantic actions/attributes are subject to the language they're written in (Syntax currently Java/C++ specific).
+    <br/>Set the language via Settings → Languages &amp; Frameworks → Template Data Languages</li>
+</ul>
 <h3>v5</h3><ul>
   <li>Implement brace matching for instrumentation code delimiters</li>
   <li>(Internal) Lexer matches braces separate from instrumentation code</li>

@@ -13,13 +13,20 @@ Following the [Custom Language Support Tutorial](http://www.jetbrains.org/intell
 # TODOs
 * language injection
     - configurable language and/or good guess
+    - in IF() conflict resolvers
 
-- folding: comments, injected blocks (esp. at file start)
-- references: not resolved in IGNORE, COMMENTS, PRAGMAS
+- folding
+    - comments, injected blocks (esp. at file start)
+    - broken after modification of block (production)
+- references
+    - not resolved in IGNORE, COMMENTS, PRAGMAS
+    - rework using a cache: <https://www.plugin-dev.com/intellij/custom-language/psi-element-caching/>, `com.intellij.psi.PsiReferenceContributor`,
+      <https://github.com/halirutan/Mathematica-IntelliJ-Plugin/blob/fb_BetterResolveAndHighlighting/src/de/halirutan/mathematica/lang/resolve/MathematicaSymbolResolver.java> <https://github.com/halirutan/Mathematica-IntelliJ-Plugin/blob/fb_BetterResolveAndHighlighting/src/de/halirutan/mathematica/lang/psi/impl/SymbolImpl.java>
 - customizable syntax highlighting: [Color Settings Page](http://www.jetbrains.org/intellij/sdk/docs/tutorials/custom_language_support/syntax_highlighter_and_color_settings_page.html)
     - syntax highlighting: different colors for keywords, charsets, tokens, productions
 - PRAGMAs in structure view
 - `$CNF` file header
+- Coco output handling: link messages (with line:col or production name) to atg file
 
 - code completion, templates, "new file" (template), build system integration, quick fix, code style, ...
 
